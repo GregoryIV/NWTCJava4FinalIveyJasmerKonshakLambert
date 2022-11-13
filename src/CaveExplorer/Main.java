@@ -1,35 +1,11 @@
 package CaveExplorer;
 
 import java.io.*;
+import java.time.LocalTime;
+import java.util.Locale;
 
 public class Main {
     static Game game;
-
-    private static void saveGame() {
-        try {
-            FileOutputStream fos = new FileOutputStream("CaveExplorer.sav");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(game); // game
-            oos.flush(); // write out any buffered bytes
-            oos.close();
-            System.out.print("Game saved\n");
-        } catch (Exception e) {
-            System.out.print("Serialization Error! Can't save data.\n"
-                    + e.getClass() + ": " + e.getMessage() + "\n");
-        }
-    }
-    private static void loadGame() {
-        try {
-            FileInputStream fis = new FileInputStream("CaveExplorer.sav");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            game = (Game) ois.readObject();
-            ois.close();
-            System.out.print("\n---Game loaded---\n");
-        } catch (Exception e) {
-            System.out.print("Serialization Error! Can't load data.\n");
-            System.out.print(e.getClass() + ": " + e.getMessage() + "\n");
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         String input;
@@ -38,25 +14,54 @@ public class Main {
         boolean continueGame = true;
 
         game = new Game();
-        //game.showIntro();
+        testLocaleIntro();
 
         do {
             System.out.print("> ");
             input = inputReader.readLine();
-            switch (input) {
-                case "save":
-                    saveGame();
-                    break;
-                case "load":
-                    loadGame();
-                    break;
-                default:
-                    output = game.runCommand(input);
-                    break;
-            }
-            if (!output.trim().isEmpty()) {
-                game.showStr(output);
-            }
+            continueGame = false;
         } while (continueGame);
+    }
+
+    //Testing resource bundles for english/spanish game intro messages
+    private static void testLocaleIntro() {
+        LocalTime earlyMorning = LocalTime.of(5,35,16);
+        LocalTime morning = LocalTime.of(8,55,55);
+        LocalTime noon = LocalTime.of(12,22,56);
+        LocalTime afternoon = LocalTime.of(16,5,0);
+        LocalTime evening = LocalTime.of(22,11,27);
+
+        Locale english = new Locale.Builder().setLanguage("en").build();
+        Locale spanish = new Locale.Builder().setLanguage("es").build();
+
+        //Early Morning Test
+        System.out.print("Early Morning Intro English: ");
+        game.showIntro(earlyMorning,english);
+        System.out.print("Early Morning Intro Spanish: ");
+        game.showIntro(earlyMorning,spanish);
+
+        //Morning Test
+        System.out.print("Morning Intro English: ");
+        game.showIntro(morning,english);
+        System.out.print("Morning Intro Spanish: ");
+        game.showIntro(morning,spanish);
+
+        //Noon Test
+        System.out.print("Noon Intro English: ");
+        game.showIntro(noon,english);
+        System.out.print("Noon Intro Spanish: ");
+        game.showIntro(noon,spanish);
+
+        //Afternoon Test
+        System.out.print("Afternoon Intro English: ");
+        game.showIntro(afternoon,english);
+        System.out.print("Afternoon Intro Spanish: ");
+        game.showIntro(afternoon,spanish);
+
+        //Evening Test
+        System.out.print("Evening Intro English: ");
+        game.showIntro(evening,english);
+        System.out.print("Evening Intro Spanish: ");
+        game.showIntro(evening,spanish);
     }
 }

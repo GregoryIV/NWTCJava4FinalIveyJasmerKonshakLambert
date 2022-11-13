@@ -1,36 +1,30 @@
 package CaveExplorer;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Game {
 
-    // utility method to display string if not empty
-    // stripping any trailing newlines
-    void showStr(String s) {
-        if (s.endsWith("\n")) {
-            s = s.substring(0, s.length() - 1);
-        }
-        if (!s.isEmpty()) {
-            System.out.println(s);
-        }
-    }
+    //Displays the game's introduction based on time and locale
+    public void showIntro (LocalTime time, Locale locale) {
+        String introMessage = "";
+        ResourceBundle rb = ResourceBundle.getBundle("CaveExplorer", locale);
 
-    public String runCommand(String inputstr) {
-        List<String> wordlist;
-        String s;
-        String lowstr;
-
-        s = "ok";
-        lowstr = inputstr.trim().toLowerCase();
-
-        if (!lowstr.equals("q")) {
-            if (lowstr.equals("")) {
-                s = "You must enter a command";
-            } else {
-                wordlist = Parser.wordList(lowstr);
-                s = Parser.parseCommand(wordlist);
-            }
+        if (time.isAfter(Times.earlyMorningBeg) && time.isBefore(Times.earlyMorningEnd)) {
+            introMessage = rb.getString("intro_early_morning");
+        } else if (time.isAfter(Times.morningBeg) && time.isBefore(Times.morningEnd)) {
+            introMessage = rb.getString("intro_morning");
+        } else if (time.isAfter(Times.noonBeg) && time.isBefore(Times.noonEnd)) {
+            introMessage = rb.getString("intro_noon");
+        } else if (time.isAfter(Times.afternoonBeg) && time.isBefore(Times.afternoonEnd)) {
+            introMessage = rb.getString("intro_afternoon");
+        } else if (time.isAfter(Times.eveningBeg) && time.isBefore(Times.eveningEnd)) {
+            introMessage = rb.getString("intro_evening");
         }
-        return s;
+
+        System.out.println(introMessage);
     }
 }
