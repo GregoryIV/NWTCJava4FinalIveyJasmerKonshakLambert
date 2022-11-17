@@ -4,7 +4,7 @@ import java.io.*;
 import java.time.LocalTime;
 import java.util.Locale;
 
-public class Main {
+public class CaveExplorer {
     static Game game;
 
     public static void main(String[] args) throws IOException {
@@ -14,12 +14,17 @@ public class Main {
         boolean continueGame = true;
 
         game = new Game();
-        testLocaleIntro();
+        //testLocaleIntro();
 
         do {
             System.out.print("> ");
             input = inputReader.readLine();
-            continueGame = false;
+
+            output = Parser.parseUserInput(input);
+
+            System.out.println(output);
+
+            //continueGame = false;
         } while (continueGame);
     }
 

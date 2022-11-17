@@ -3,7 +3,13 @@ package CaveExplorer;
 import java.util.ArrayList;
 
 public class Room extends GameObject {
+    //Stores the rooms for all four cardinal directions
     private Room northRoom,southRoom,eastRoom, westRoom;
+
+    //Rooms locked are not able to be accessed
+    private boolean isLocked;
+
+    private String lockedStatus;
 
     private ArrayList<Item> items;
 
@@ -58,4 +64,11 @@ public class Room extends GameObject {
     public void setWestRoom(Room westRoom) {
         this.westRoom = westRoom;
     }
+
+    public boolean getLocked() {return isLocked;}
+
+    public void setLocked(boolean isLocked) {this.isLocked = isLocked;}
+
+    public String getLockedStatus() {return lockedStatus;}
+    public void setLockedStatus(String lockedStatus) {this.lockedStatus = lockedStatus;}
 }

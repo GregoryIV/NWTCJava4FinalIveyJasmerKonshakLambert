@@ -5,12 +5,20 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Game class stores and manipulates all information about the game
+ */
 public class Game {
 
     private ArrayList<Room> map;
     private Player player;
 
+    /**
+     * Game constructor instantiates all the game objects
+     */
     public Game() {
+        Parser.initializeCommandList();
+
         //Create map
         map = new ArrayList<Room>();
 
@@ -55,7 +63,13 @@ public class Game {
         player = new Player("Adventurer1","A bold cave diver.", caveEntrance, playerInventory);
     }
 
-    //Displays the game's introduction based on time and locale
+    /**
+     * Displays the game's introduction based on time and locale
+     *
+     * @param time
+     * @param locale
+     */
+
     public void showIntro (LocalTime time, Locale locale) {
         String introMessage = "";
         ResourceBundle rb = ResourceBundle.getBundle("CaveExplorer", locale);
@@ -75,7 +89,7 @@ public class Game {
         System.out.println(introMessage);
     }
 
-    public String look(GameObject gameObject) {
-        return "";
+    public String MovePlayer(Direction d) {
+        return player.move(d);
     }
 }
