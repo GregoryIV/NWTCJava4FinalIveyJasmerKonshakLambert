@@ -20,7 +20,7 @@ public class Parser {
 
         c = commandList.findCommand(commands.get(0));
 
-        if (c.equals(null)) {
+        if (c == null) {
             msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
         } else if (c.getWordCountMaximum() < 2 ) {
             msg = "Can't do this because the '" + commands.get(0) + "' command only needs " + c.getWordCountMaximum() + " word(s)!";
@@ -42,7 +42,7 @@ public class Parser {
 
         c = commandList.findCommand(commands.get(0));
 
-        if (c.equals(null)) {
+        if (c == null) {
             msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
         } else if (c.getWordCountMinimum() > 1 ) {
             msg = "Can't do this because the '" + commands.get(0) + "' needs " + c.getWordCountMinimum() + " words!";
@@ -103,7 +103,7 @@ public class Parser {
 
         d = Direction.findByString(direction);
 
-        if (!d.equals(null)) {
+        if (d != null) {
             returnString = CaveExplorer.game.MovePlayer(d);
         } else {
             returnString = direction + " is not a direction to move.";
