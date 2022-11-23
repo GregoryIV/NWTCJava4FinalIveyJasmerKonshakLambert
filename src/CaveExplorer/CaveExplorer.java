@@ -1,9 +1,14 @@
 package CaveExplorer;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalTime;
 import java.util.Locale;
 
+/**
+ *
+ */
 public class CaveExplorer {
     static Game game;
 

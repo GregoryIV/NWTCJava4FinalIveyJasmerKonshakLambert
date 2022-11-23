@@ -1,19 +1,44 @@
 package CaveExplorer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Parser {
     private static CommandList commandList = new CommandList();
 
     public static void initializeCommandList() {
-        commandList.add(new Command("go",2,2));
-        commandList.add(new Command("move",2, 2));
-        commandList.add(new Command("look",1, 2));
-        commandList.add(new Command("take",2, 2));
-        commandList.add(new Command("inventory",1,1));
+        Command lookCommand = new Command("look",1, 2);
+        Command moveCommand = new Command("move",2, 2);
+        Command takeCommand = new Command("take",2,2);
+        Command dropCommand = new Command("drop",2,2);
+        Command inventoryCommand = new Command("inventory",1,1);
+        Command useCommand = new Command("use",2,2);
+
+        moveCommand.addSynonym("walk");
+        moveCommand.addSynonym("go");
+
+        lookCommand.addSynonym("inspect");
+        lookCommand.addSynonym("describe");
+        lookCommand.addSynonym("investigate");
+
+        takeCommand.addSynonym("grab");
+        takeCommand.addSynonym("pickup");
+
+        inventoryCommand.addSynonym("i");
+
+        commandList.add(moveCommand);
+        commandList.add(lookCommand);
+        commandList.add(takeCommand);
+        commandList.add(dropCommand);
+        commandList.add(inventoryCommand);
+        commandList.add(useCommand);
     }
 
+
+    /**
+     * TODO Go through double word commands and implement the correct methods
+     *
+     * @param commands
+     * @return
+     */
     private static String processDoubleCommand(ArrayList<String> commands) {
         Command c;
         String msg = "";
@@ -29,6 +54,9 @@ public class Parser {
                 case "move":
                     msg = processMove(commands.get(1));
                     break;
+                case "look":
+                    //TODO implement the look command
+                    break;
                 default:
                     break;
             }
@@ -36,6 +64,12 @@ public class Parser {
         return msg;
     }
 
+    /**
+     * TODO Go through single word commands and implement the correct methods
+     *
+     * @param commands
+     * @return
+     */
     private static String processSingleCommand(ArrayList<String> commands) {
         Command c;
         String msg = "";
@@ -45,7 +79,7 @@ public class Parser {
         if (c == null) {
             msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
         } else if (c.getWordCountMinimum() > 1 ) {
-            msg = "Can't do this because the '" + commands.get(0) + "' needs " + c.getWordCountMinimum() + " words!";
+            msg = "Can't do this because the '" + commands.get(0) + "' command needs " + c.getWordCountMinimum() + " words!";
         } else {
             switch (c.getName()) {
                 case "n":
