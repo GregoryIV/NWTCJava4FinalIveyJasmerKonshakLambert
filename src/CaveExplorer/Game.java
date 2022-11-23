@@ -34,22 +34,22 @@ public class Game {
         Room caveRoom4 = new Room("cave cave", "Cave room 4");
         Room caveRoom5 = new Room("cave description", "Cave room 5");
 
-        //Create Room Items
-        ArrayList<Item> caveEntranceItems = new ArrayList<Item>();
-        ArrayList<Item> caveRoom2Items = new ArrayList<Item>();
-        ArrayList<Item> caveRoom3Items = new ArrayList<Item>();
-        ArrayList<Item> caveRoom4Items = new ArrayList<Item>();
-        ArrayList<Item> caveRoom5Items = new ArrayList<Item>();
+        //Create Room Inventories
+        Inventory caveEntranceInventory = new Inventory();
+        Inventory caveRoom2Inventory = new Inventory();
+        Inventory caveRoom3Inventory = new Inventory();
+        Inventory caveRoom4Inventory = new Inventory();
+        Inventory caveRoom5Inventory = new Inventory();
 
-        caveEntranceItems.add(pickaxe);
-        caveRoom5Items.add(dynamite);
+        caveEntranceInventory.add(pickaxe);
+        caveRoom5Inventory.add(dynamite);
 
-        //Map out rooms and initialize items
-        caveEntrance.initializeRoom(null,null,caveRoom2,null,caveEntranceItems);
-        caveRoom2.initializeRoom(caveRoom3,null,null,caveEntrance,caveRoom2Items);
-        caveRoom3.initializeRoom(caveRoom5,caveRoom2,caveRoom4,null,caveRoom3Items);
-        caveRoom4.initializeRoom(null,null,null,caveRoom3,caveRoom4Items);
-        caveRoom5.initializeRoom(null,caveRoom3,null,null,caveRoom5Items);
+        //Map out rooms and initialize inventories
+        caveEntrance.initializeRoom(null,null,caveRoom2,null,caveEntranceInventory);
+        caveRoom2.initializeRoom(caveRoom3,null,null,caveEntrance,caveRoom2Inventory);
+        caveRoom3.initializeRoom(caveRoom5,caveRoom2,caveRoom4,null,caveRoom3Inventory);
+        caveRoom4.initializeRoom(null,null,null,caveRoom3,caveRoom4Inventory);
+        caveRoom5.initializeRoom(null,caveRoom3,null,null,caveRoom5Inventory);
 
         map.add(caveEntrance);
         map.add(caveRoom2);
@@ -58,7 +58,7 @@ public class Game {
         map.add(caveRoom5);
 
         //Create Player
-        ArrayList<Item> playerInventory = new ArrayList<>();
+        Inventory playerInventory = new Inventory();
         playerInventory.add(flashlight);
         player = new Player("Adventurer1","A bold cave diver.", caveEntrance, playerInventory);
     }
@@ -92,4 +92,8 @@ public class Game {
     public String MovePlayer(Direction d) {
         return player.move(d);
     }
+    public String ShowPlayerInventory() {return player.printInventory();}
+    public String playerLook() {return player.look();}
+
+    public String playerLookAt(String gameObject) {return player.lookAt(gameObject);}
 }

@@ -1,17 +1,12 @@
 package CaveExplorer;
 
-import java.util.ArrayList;
-
 /**
  * Represents a player in the game from a first-person perspective.
  */
-public class Player extends GameObject implements Movable{
+public class Player extends ItemHolder implements Movable{
 
     //The current room that the player is in
     private Room currentRoom;
-
-    //The players inventory
-    private ArrayList<Item> inventory;
 
     /**
      * Player constructor
@@ -21,10 +16,13 @@ public class Player extends GameObject implements Movable{
      * @param currentRoom The current room the player is in
      * @param inventory The players current inventory
      */
-    public Player(String name, String description, Room currentRoom, ArrayList<Item> inventory) {
+    public Player(String name, String description, Room currentRoom, Inventory inventory) {
+        super(name, description, inventory);
+        this.currentRoom = currentRoom;
+    }
+    public Player(String name, String description, Room currentRoom) {
         super(name, description);
         this.currentRoom = currentRoom;
-        this.inventory = inventory;
     }
 
     /**
@@ -43,11 +41,15 @@ public class Player extends GameObject implements Movable{
      * @param gameObject The game object that is being described.
      * @return The game objects description.
      */
-    public String look(String object) {
-        GameObject gameObject;
+    public String lookAt(String gameObject) {
+        GameObject go;
         String returnString = "";
 
-        return "";
+        //Find object in player inventory
+
+        //Find object in current room
+
+        return "Description of " + gameObject;
     }
 
     /**
@@ -116,6 +118,11 @@ public class Player extends GameObject implements Movable{
     }
 
     public boolean findInInventoryByString(String item) {
-        return  inventory.contains(item);
+        findInInventoryByString(item);
+        return false;
+    }
+
+    public String printInventory() {
+        return getInventoryList();
     }
 }

@@ -1,8 +1,6 @@
 package CaveExplorer;
 
-import java.util.ArrayList;
-
-public class Room extends GameObject {
+public class Room extends ItemHolder {
     //Stores the rooms for all four cardinal directions
     private Room northRoom,southRoom,eastRoom, westRoom;
 
@@ -10,8 +8,6 @@ public class Room extends GameObject {
     private boolean isLocked;
 
     private String lockedStatus;
-
-    private ArrayList<Item> items;
 
     public Room() {
         super("","");
@@ -25,12 +21,12 @@ public class Room extends GameObject {
     }
 
     public void initializeRoom(Room northRoom, Room southRoom,
-                          Room eastRoom, Room westRoom, ArrayList<Item> items) {
+                          Room eastRoom, Room westRoom, Inventory inventory) {
         this.northRoom = northRoom;
         this.southRoom = southRoom;
         this.eastRoom = eastRoom;
         this.westRoom = westRoom;
-        this.items = items;
+        setInventory(inventory);
     }
 
     public Room getEastRoom() {

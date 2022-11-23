@@ -7,34 +7,24 @@ import java.util.ArrayList;
  */
 public class Command {
     private String name;
-    private int wordCountMinimum;
-    private int wordCountMaximum;
     private ArrayList<String> synonyms;
 
-    public Command(String name, int wordCountMinimum, int wordCountMaximum) {
+    private String helpMessage;
+
+    public Command(String name, String helpMessage) {
         this.name = name;
-        this.wordCountMinimum = wordCountMinimum;
-        this.wordCountMaximum = wordCountMaximum;
+        this.helpMessage = helpMessage;
         synonyms = new ArrayList<>();
     }
 
-    public Command(String name, int wordCountMinimum, int wordCountMaximum, ArrayList<String> synonyms) {
+    public Command(String name, ArrayList<String> synonyms, String helpMessage) {
         this.name = name;
-        this.wordCountMinimum = wordCountMinimum;
-        this.wordCountMaximum = wordCountMaximum;
         this.synonyms = synonyms;
+        this.helpMessage = helpMessage;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getWordCountMinimum() {
-        return wordCountMinimum;
-    }
-
-    public int getWordCountMaximum() {
-        return wordCountMaximum;
     }
 
     public boolean containsSynonym(String synonym) {

@@ -5,12 +5,19 @@ public class Parser {
     private static CommandList commandList = new CommandList();
 
     public static void initializeCommandList() {
-        Command lookCommand = new Command("look",1, 2);
-        Command moveCommand = new Command("move",2, 2);
-        Command takeCommand = new Command("take",2,2);
-        Command dropCommand = new Command("drop",2,2);
-        Command inventoryCommand = new Command("inventory",1,1);
-        Command useCommand = new Command("use",2,2);
+        SingleCommand lookCommand = new SingleCommand("look","The look command describes the player's current location");
+        DoubleCommand lookAtCommand = new DoubleCommand("look",
+                "The look [object] command describes the object.\n" +
+                           "[object] - Any given object within the players field of vision");
+        DoubleCommand moveCommand = new DoubleCommand("move",
+                "The move [direction] command moves the player in the given direction.\n" +
+                            "[direction] - North/South/East/West");
+        DoubleCommand takeCommand = new DoubleCommand("take","");
+        DoubleCommand dropCommand = new DoubleCommand("drop","");
+        SingleCommand inventoryCommand = new SingleCommand("inventory","");
+        DoubleCommand useCommand = new DoubleCommand("use","");
+        SingleCommand helpCommand = new SingleCommand("help",
+                "The help command lists all available commands.");
 
         moveCommand.addSynonym("walk");
         moveCommand.addSynonym("go");
@@ -24,12 +31,16 @@ public class Parser {
 
         inventoryCommand.addSynonym("i");
 
+        helpCommand.addSynonym("?");
+
         commandList.add(moveCommand);
         commandList.add(lookCommand);
+        commandList.add(lookAtCommand);
         commandList.add(takeCommand);
         commandList.add(dropCommand);
         commandList.add(inventoryCommand);
         commandList.add(useCommand);
+        commandList.add(helpCommand);
     }
 
 
@@ -40,22 +51,38 @@ public class Parser {
      * @return
      */
     private static String processDoubleCommand(ArrayList<String> commands) {
-        Command c;
+        String commandName = commands.get(0);
+        String commandParameter = commands.get(1);
+        DoubleCommand c;
         String msg = "";
 
-        c = commandList.findCommand(commands.get(0));
+        c = commandList.findDoubleCommand(commandName);
 
         if (c == null) {
-            msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
-        } else if (c.getWordCountMaximum() < 2 ) {
-            msg = "Can't do this because the '" + commands.get(0) + "' command only needs " + c.getWordCountMaximum() + " word(s)!";
+            if (commandList.findSingleCommand(commandName) == null) {
+                msg = "Can't do this because '" + commandName + "' is not a command!";
+            } else {
+                msg = "Can't do this because the '" + commandName + "' command only needs one word!";
+            }
         } else {
+            c.setParameter(commandParameter);
+
             switch (c.getName()) {
                 case "move":
-                    msg = processMove(commands.get(1));
+                    msg = processMove(c.getParameter());
                     break;
                 case "look":
                     //TODO implement the look command
+                    msg = CaveExplorer.game.playerLookAt(c.getParameter());
+                    break;
+                case "take":
+                    //TODO implement the take command
+                    break;
+                case "drop":
+                    //TODO implement the drop command
+                    break;
+                case "use":
+                    //TODO implement the use command
                     break;
                 default:
                     break;
@@ -71,15 +98,17 @@ public class Parser {
      * @return
      */
     private static String processSingleCommand(ArrayList<String> commands) {
-        Command c;
+        SingleCommand c;
         String msg = "";
 
-        c = commandList.findCommand(commands.get(0));
+        c = commandList.findSingleCommand(commands.get(0));
 
         if (c == null) {
-            msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
-        } else if (c.getWordCountMinimum() > 1 ) {
-            msg = "Can't do this because the '" + commands.get(0) + "' command needs " + c.getWordCountMinimum() + " words!";
+            if (commandList.findDoubleCommand(commands.get(0)) == null) {
+                msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
+            } else {
+                msg = "Can't do this because the '" + commands.get(0) + "' command needs two words!";
+            }
         } else {
             switch (c.getName()) {
                 case "n":
@@ -94,11 +123,11 @@ public class Parser {
                     break;
                 case "down":
                     break;
-                case "l":
                 case "look":
+                    msg = CaveExplorer.game.playerLook();
                     break;
                 case "inventory":
-                case "i":
+                    msg = CaveExplorer.game.ShowPlayerInventory();
                     break;
                 default:
                     break;
