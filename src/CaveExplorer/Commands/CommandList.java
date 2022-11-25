@@ -23,10 +23,10 @@ public class CommandList extends ArrayList<Command> {
         return null;
     }
 
-    public DoubleCommand findDoubleCommand(String command) {
+    public CommandWithParameter findDoubleCommand(String command) {
         for (Command c: this) {
-            if (c instanceof DoubleCommand & (c.getName().equals(command) || c.containsSynonym(command))) {
-                return (DoubleCommand)c;
+            if (c instanceof CommandWithParameter & (c.getName().equals(command) || c.containsSynonym(command))) {
+                return (CommandWithParameter)c;
             }
         }
 

@@ -34,7 +34,7 @@ public class MainTest {
 
         do {
             SingleCommand c;
-            DoubleCommand d;
+            CommandWithParameter d;
 
             c = commands.findSingleCommand("look");
 

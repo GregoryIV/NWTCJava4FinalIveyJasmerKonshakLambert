@@ -1,12 +1,10 @@
 package CaveExplorer.Commands;
-import CaveExplorer.CaveExplorer;
 import CaveExplorer.Direction;
 import CaveExplorer.Game;
-import CaveExplorer.Movable;
 
 import java.util.ArrayList;
 
-public class MoveCommand extends MasterCommand implements DoubleCommand{
+public class MoveCommand extends MasterCommand implements CommandWithParameter {
 
     public MoveCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);
