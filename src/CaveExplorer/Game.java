@@ -17,7 +17,8 @@ public class Game {
      * Game constructor instantiates all the game objects
      */
     public Game() {
-        Parser.initializeCommandList();
+
+        Parser.initializeCommandList(this);
 
         //Create map
         map = new ArrayList<Room>();
@@ -61,6 +62,7 @@ public class Game {
         Inventory playerInventory = new Inventory();
         playerInventory.add(flashlight);
         player = new Player("Adventurer1","A bold cave diver.", caveEntrance, playerInventory);
+
     }
 
     /**
@@ -96,6 +98,11 @@ public class Game {
     public String playerLook() {return player.look();}
 
     public String playerLookAt(String gameObject) {return player.lookAt(gameObject);}
+    public String playerTakeItem(String item) {return player.takeItem(item);}
+
+    public String playerUseItem(String item) {return player.useItem(item);}
+
+    public String playerDropItem(String item) {return player.dropItem(item);}
 
     public Inventory getPlayerInventory() {return player.getInventory();}
 

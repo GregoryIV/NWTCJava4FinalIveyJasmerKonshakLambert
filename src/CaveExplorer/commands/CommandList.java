@@ -1,4 +1,4 @@
-package CaveExplorer;
+package CaveExplorer.commands;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class CommandList extends ArrayList<Command> {
     public Command findCommand(String command){
         for (Command c: this) {
             if ((c.getName().equals(command) || c.containsSynonym(command))) {
-                return c;
+                return (Command) c;
             }
         }
 
@@ -23,10 +23,10 @@ public class CommandList extends ArrayList<Command> {
         return null;
     }
 
-    public DoubleCommand findDoubleCommand(String command) {
+    public CommandWithParameter findCommandWithParameter(String command) {
         for (Command c: this) {
-            if (c instanceof DoubleCommand & (c.getName().equals(command) || c.containsSynonym(command))) {
-                return (DoubleCommand)c;
+            if (c instanceof CommandWithParameter & (c.getName().equals(command) || c.containsSynonym(command))) {
+                return (CommandWithParameter)c;
             }
         }
 

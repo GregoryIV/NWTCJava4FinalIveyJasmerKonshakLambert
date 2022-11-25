@@ -25,7 +25,7 @@ public abstract class ItemHolder extends GameObject {
             inventoryList.append(item.getName() + "\n");
         });
 
-        return inventoryList.toString();
+        return inventoryList.toString().trim();
     }
 
     public void setInventory(Inventory inventory) {

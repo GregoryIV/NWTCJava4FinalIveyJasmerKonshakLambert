@@ -1,7 +1,5 @@
-package CaveExplorer.Commands;
+package CaveExplorer.commands;
 
-import CaveExplorer.CaveExplorer;
-import CaveExplorer.Direction;
 import CaveExplorer.Game;
 
 import java.util.ArrayList;

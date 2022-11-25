@@ -1,11 +1,11 @@
-package CaveExplorer.Commands;
+package CaveExplorer.commands;
 
-import CaveExplorer.Direction;
 import CaveExplorer.Game;
+import CaveExplorer.commands.Command;
 
 import java.util.ArrayList;
 
-public abstract class MasterCommand implements Command{
+public abstract class MasterCommand implements Command {
     Game game;
     String name;
     ArrayList<String> synonyms;

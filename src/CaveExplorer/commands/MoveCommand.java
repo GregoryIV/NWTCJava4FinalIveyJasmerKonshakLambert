@@ -1,4 +1,5 @@
-package CaveExplorer.Commands;
+package CaveExplorer.commands;
+
 import CaveExplorer.Direction;
 import CaveExplorer.Game;
 

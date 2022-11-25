@@ -1,4 +1,4 @@
-package CaveExplorer.Commands;
+package CaveExplorer.commands;
 
 import java.util.ArrayList;
 

@@ -125,13 +125,48 @@ public class Player extends ItemHolder implements Movable{
         return returnString;
     }
 
-    public boolean findInInventoryByString(String item) {
-        findInInventoryByString(item);
-        return false;
-    }
-
     public String printInventory() {
         return getInventoryList();
+    }
+
+    public String takeItem(String item) {
+        Item i;
+        String returnString;
+
+        i = findItemInRoom(item);
+
+        if (i == null) {
+            returnString = "There is no " + item + " to take";
+        } else {
+            giveItemToInventory(currentRoom.getInventory(), i);
+            returnString = "You take the " + item;
+        }
+
+        return returnString;
+    }
+
+    public String useItem(String item) {
+        return "You use the " + item;
+    }
+
+    public String dropItem(String item) {
+        Item i;
+        String returnString;
+
+        i = getInventory().findItemByString(item);
+
+        if (i == null) {
+            returnString = "You have no " + item + " to drop";
+        } else {
+            receiveItemFromInventory(currentRoom.getInventory(), i);
+            returnString = "You drop the " + item;
+        }
+
+        return returnString;
+    }
+
+    private Item findItemInRoom(String item) {
+        return currentRoom.getInventory().findItemByString(item);
     }
 
 }
