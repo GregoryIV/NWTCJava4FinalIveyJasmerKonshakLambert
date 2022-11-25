@@ -96,4 +96,9 @@ public class Game {
     public String playerLook() {return player.look();}
 
     public String playerLookAt(String gameObject) {return player.lookAt(gameObject);}
+
+    public Inventory getPlayerInventory() {return player.getInventory();}
+
+    public Inventory getCurrentRoomInventory () {return player.getCurrentRoom().getInventory();}
+
 }

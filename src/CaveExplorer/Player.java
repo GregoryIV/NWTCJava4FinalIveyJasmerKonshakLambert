@@ -46,10 +46,20 @@ public class Player extends ItemHolder implements Movable{
         String returnString = "";
 
         //Find object in player inventory
+        go = getInventory().findItemByString(gameObject);
+
+        if (go != null) {
+            return go.getDescription();
+        }
 
         //Find object in current room
+        go = currentRoom.getInventory().findItemByString(gameObject);
 
-        return "Description of " + gameObject;
+        if (go != null) {
+            return go.getDescription();
+        }
+
+        return "There is no " + gameObject + " in your inventory, or in the room.";
     }
 
     /**
@@ -57,7 +67,6 @@ public class Player extends ItemHolder implements Movable{
      *
      * @return Current Room
      */
-    @Override
     public Room getCurrentRoom() {
         return this.currentRoom;
     }
@@ -67,7 +76,6 @@ public class Player extends ItemHolder implements Movable{
      *
      * @param currentRoom The room that will be set to the current room
      */
-    @Override
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
@@ -125,4 +133,5 @@ public class Player extends ItemHolder implements Movable{
     public String printInventory() {
         return getInventoryList();
     }
+
 }

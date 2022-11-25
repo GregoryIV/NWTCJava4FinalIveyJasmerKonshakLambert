@@ -9,7 +9,7 @@ public abstract class GameObject {
         this.description = description;
     }
 
-    String getName() {return name;}
+    public String getName() {return name;}
 
-    String getDescription() {return  description;}
+    public String getDescription() {return  description;}
 }

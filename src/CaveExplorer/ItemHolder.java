@@ -53,4 +53,6 @@ public abstract class ItemHolder extends GameObject {
         givingInventory.remove(transferItem);
         addInventoryItem(tempItem);
     }
+
+    public Inventory getInventory() {return inventory;}
 }
