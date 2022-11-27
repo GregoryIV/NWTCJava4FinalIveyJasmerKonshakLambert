@@ -13,16 +13,6 @@ public class CommandList extends ArrayList<Command> {
         return null;
     }
 
-    public SingleCommand findSingleCommand(String command){
-        for (Command c: this) {
-            if (c instanceof SingleCommand & (c.getName().equals(command) || c.containsSynonym(command))) {
-                return (SingleCommand) c;
-            }
-        }
-
-        return null;
-    }
-
     public CommandWithParameter findCommandWithParameter(String command) {
         for (Command c: this) {
             if (c instanceof CommandWithParameter & (c.getName().equals(command) || c.containsSynonym(command))) {

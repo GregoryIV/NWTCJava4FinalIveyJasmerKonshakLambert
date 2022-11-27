@@ -3,13 +3,15 @@ package CaveExplorer;
 import CaveExplorer.commands.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Parser {
     private static CommandList commandList = new CommandList();
 
     public static void initializeCommandList(Game game) {
         LookCommand lookCommand = new LookCommand(game,"look");
         MoveCommand moveCommand = new MoveCommand(game,"move");
-        LookAtCommand lookAtCommand = new LookAtCommand(game,"look");
         TakeCommand takeCommand = new TakeCommand(game,"take");
         UseCommand useCommand = new UseCommand(game,"use");
         InventoryCommand inventoryCommand = new InventoryCommand(game,"inventory");
@@ -29,64 +31,24 @@ public class Parser {
 
         commandList.add(moveCommand);
         commandList.add(lookCommand);
-        commandList.add(lookAtCommand);
         commandList.add(takeCommand);
         commandList.add(dropCommand);
         commandList.add(inventoryCommand);
         commandList.add(useCommand);
     }
 
+    private static String processCommand(ArrayList<String> commands) {
 
-    /**
-     * TODO Go through double word commands and implement the correct methods
-     *
-     * @param commands
-     * @return
-     */
-    private static String processCommandWithParameter(ArrayList<String> commands) {
-
-        String commandName = commands.get(0);
-        String commandParameter = commands.get(1);
         CommandWithParameter c;
         String msg = "";
+        String[] parameters = ((commands.size()>1) ? commands.subList(1, commands.size()).toArray(new String[0]) : null);;
 
-        c = commandList.findCommandWithParameter(commandName);
-
-        if (c == null) {
-            if (commandList.findSingleCommand(commandName) == null) {
-                msg = "Can't do this because '" + commandName + "' is not a command!";
-            } else {
-                msg = "Can't do this because the '" + commandName + "' command only needs one word!";
-            }
-        } else {
-            msg = c.execute(commandParameter);
-
-        }
-
-        return msg;
-    }
-
-    /**
-     * TODO Go through single word commands and implement the correct methods
-     *
-     * @param commands
-     * @return
-     */
-    private static String processSingleCommand(ArrayList<String> commands) {
-
-        SingleCommand c;
-        String msg = "";
-
-        c = commandList.findSingleCommand(commands.get(0));
+        c = commandList.findCommandWithParameter(commands.get(0));
 
         if (c == null) {
-            if (commandList.findCommandWithParameter(commands.get(0)) == null) {
-                msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
-            } else {
-                msg = "Can't do this because the '" + commands.get(0) + "' command needs two words!";
-            }
+            msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
         } else {
-            msg = c.execute();
+            msg = c.execute(parameters);
         }
 
         return msg;
@@ -99,35 +61,11 @@ public class Parser {
 
         if (commands.size() == 0) {
             returnString = "You must write a command!";
-        } else if (commands.size() > 2) {
+        } else if (commands.size() > 3) {
             returnString = "That command is too long!";
         } else {
-            switch (commands.size()) {
-                case 1:
-                    returnString = processSingleCommand(commands);
-                    break;
-                case 2:
-                    returnString = processCommandWithParameter(commands);
-                    break;
-                default:
-                    returnString = "Unable to process command";
-                    break;
-            }
+            returnString = processCommand(commands);
         }
-        return returnString;
-    }
-    private static String processMove(String direction) {
-        Direction d;
-        String returnString = "";
-
-        d = Direction.findByString(direction);
-
-        if (d != null) {
-            returnString = CaveExplorer.game.MovePlayer(d);
-        } else {
-            returnString = direction + " is not a direction to move.";
-        }
-
         return returnString;
     }
 
@@ -138,7 +76,17 @@ public class Parser {
         for (String command : sanitizedInput) {
             commands.add(command);
         }
+
+        removePrepositions(commands);
+
         return commands;
+
+    }
+
+    private static void removePrepositions(ArrayList<String> commands) {
+        List<String> prepositions = Arrays.asList("on","in");
+
+        commands.removeAll(prepositions);
 
     }
 }

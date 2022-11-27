@@ -16,17 +16,30 @@ public class MoveCommand extends MasterCommand implements CommandWithParameter {
     }
 
     @Override
-    public String execute(String parameter) {
+    public String execute(String... parameters) {
         Direction d;
         String returnString = "";
+        int parametersLength;
 
-        d = Direction.findByString(parameter);
+        parametersLength = ((parameters == null) ? 0 : parameters.length);
 
-        if (d != null) {
-            returnString = game.MovePlayer(d);
-        } else {
-            returnString = parameter + " is not a direction to move.";
+        switch (parametersLength) {
+            case 1:
+
+                d = Direction.findByString(parameters[0]);
+
+                if (d != null) {
+                    returnString = game.MovePlayer(d);
+                } else {
+                    returnString = parameters[0] + " is not a direction to move.";
+                }
+                break;
+            default:
+                returnString = "Too many parameters";
+                break;
         }
+
+
 
         return returnString;
     }

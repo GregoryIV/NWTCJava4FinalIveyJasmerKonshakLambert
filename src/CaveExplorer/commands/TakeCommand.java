@@ -15,7 +15,21 @@ public class TakeCommand extends MasterCommand implements CommandWithParameter {
     }
 
     @Override
-    public String execute(String parameter) {
-        return game.playerTakeItem(parameter);
+    public String execute(String... parameters) {
+        String returnString;
+        int parametersLength;
+
+        parametersLength = ((parameters == null) ? 0 : parameters.length);
+
+        switch (parametersLength) {
+            case 1:
+                returnString = game.playerTakeItem(parameters[0]);
+                break;
+            default:
+                returnString = "Too many parameters";
+
+        }
+
+        return returnString;
     }
 }

@@ -15,7 +15,21 @@ public class DropCommand extends MasterCommand implements CommandWithParameter{
     }
 
     @Override
-    public String execute(String parameter) {
-        return game.playerDropItem(parameter);
+    public String execute(String... parameters) {
+        String returnString;
+        int parametersLength;
+
+        parametersLength = ((parameters == null) ? 0 : parameters.length);
+
+        switch (parametersLength) {
+            case 1:
+                returnString = game.playerDropItem(parameters[0]);
+                break;
+            default:
+                returnString = "Too many parameters";
+
+        }
+
+        return returnString;
     }
 }
