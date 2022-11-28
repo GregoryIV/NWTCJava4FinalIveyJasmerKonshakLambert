@@ -67,4 +67,28 @@ public class Room extends ItemHolder {
 
     public String getLockedStatus() {return lockedStatus;}
     public void setLockedStatus(String lockedStatus) {this.lockedStatus = lockedStatus;}
+
+    public String getRoomDescriptionByDirection (String direction) {
+        Direction d = Direction.findByString(direction);
+        String returnString;
+
+        switch (d) {
+            case North -> returnString = getRoomExitDescription(northRoom);
+            case East -> returnString = getRoomExitDescription(eastRoom);
+            case West -> returnString = getRoomExitDescription(westRoom);
+            case South -> returnString = getRoomExitDescription(southRoom);
+            default -> returnString = direction + " is not a valid direction";
+        }
+
+        return returnString;
+    }
+
+    public String getRoomExitDescription(Room roomExit) {
+        if (roomExit == null) {
+            return "There is no exit.";
+        } else {
+            return roomExit.getDescription();
+        }
+
+    }
 }

@@ -59,6 +59,12 @@ public class Player extends ItemHolder implements Movable{
             return go.getDescription();
         }
 
+
+        //Check if direction
+        if (Direction.findByString(gameObject) != null) {
+            return currentRoom.getRoomDescriptionByDirection(gameObject);
+        }
+
         return "There is no " + gameObject + " in your inventory, or in the room.";
     }
 
@@ -95,21 +101,11 @@ public class Player extends ItemHolder implements Movable{
 
         //Gets the room to the direction given. ie The room east of the current room.
         switch (direction) {
-            case East: 
-                exitRoom = currentRoom.getEastRoom();
-                break;
-            case West:
-                exitRoom = currentRoom.getWestRoom();
-                break;
-            case North:
-                exitRoom = currentRoom.getNorthRoom();
-                break;
-            case South:
-                exitRoom = currentRoom.getSouthRoom();
-                break;
-            default:
-                exitRoom = null;
-                break;
+            case East -> exitRoom = currentRoom.getEastRoom();
+            case West -> exitRoom = currentRoom.getWestRoom();
+            case North -> exitRoom = currentRoom.getNorthRoom();
+            case South -> exitRoom = currentRoom.getSouthRoom();
+            default -> exitRoom = null;
         }
         
         if (exitRoom == null) {
@@ -146,7 +142,22 @@ public class Player extends ItemHolder implements Movable{
     }
 
     public String useItem(String item) {
-        return "You use the " + item;
+        Item i;
+        String returnString;
+
+        i = getInventory().findItemByString(item);
+
+        if (i == null) {
+            returnString = "You have no " + item + " to use";
+        } else {
+            returnString = i.Use();
+        }
+
+        return returnString;
+    }
+
+    public String useItemOn(String itemToUse, String itemToUseOn) {
+        return "You use the " + itemToUse + " on " + itemToUseOn;
     }
 
     public String dropItem(String item) {

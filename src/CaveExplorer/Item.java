@@ -1,6 +1,6 @@
 package CaveExplorer;
 
-public class Item extends GameObject{
+public abstract class Item extends GameObject implements Useable{
     public Item(String name, String description) {
         super(name, description);
     }

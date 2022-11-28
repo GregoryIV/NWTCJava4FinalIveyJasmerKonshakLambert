@@ -24,9 +24,9 @@ public class Game {
         map = new ArrayList<Room>();
 
         //Create Items
-        Item dynamite = new Item("dynamite","Useful for blowing stuff up");
-        Item pickaxe = new Item("pickaxe","Useful for mining");
-        Item flashlight = new Item("flashlight", "Really lights up the room");
+        Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up");
+        Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining");
+        Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, true);
 
         //Create Rooms
         Room caveEntrance = new Room("A bleak cave","Cave Entrance");
@@ -103,6 +103,8 @@ public class Game {
     public String playerUseItem(String item) {return player.useItem(item);}
 
     public String playerDropItem(String item) {return player.dropItem(item);}
+
+    public String playerUseItemOn(String itemToUse, String itemToUseOn) {return player.useItemOn(itemToUse,itemToUseOn);}
 
     public Inventory getPlayerInventory() {return player.getInventory();}
 

@@ -22,6 +22,9 @@ public class TakeCommand extends MasterCommand implements CommandWithParameter {
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
+            case 0:
+                returnString = "The take command needs 1 parameter";
+                break;
             case 1:
                 returnString = game.playerTakeItem(parameters[0]);
                 break;

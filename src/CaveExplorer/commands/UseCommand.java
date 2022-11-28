@@ -25,6 +25,9 @@ public class UseCommand extends MasterCommand implements CommandWithParameter{
             case 1:
                 returnString = game.playerUseItem(parameters[0]);
                 break;
+            case 2:
+                returnString = game.playerUseItemOn(parameters[0],parameters[1]);
+                break;
             default:
                 returnString = "Too many parameters";
 
