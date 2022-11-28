@@ -1,7 +1,7 @@
 package CaveExplorer;
 
 import java.util.ArrayList;
-
+import CaveExplorer.items.*;
 public class Inventory extends ArrayList<Item> {
 
     public Item findItemByString(String item){

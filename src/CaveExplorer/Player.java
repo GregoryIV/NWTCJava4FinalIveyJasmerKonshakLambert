@@ -150,14 +150,45 @@ public class Player extends ItemHolder implements Movable{
         if (i == null) {
             returnString = "You have no " + item + " to use";
         } else {
-            returnString = i.Use();
+            if (i instanceof Usable) {
+                returnString = ((Usable)i).use();
+            }
+            else {
+                returnString = "Nothing happens";
+            }
         }
 
         return returnString;
     }
 
     public String useItemOn(String itemToUse, String itemToUseOn) {
-        return "You use the " + itemToUse + " on " + itemToUseOn;
+        Item i, i1;
+        String returnString;
+
+        i = getInventory().findItemByString(itemToUse);
+        i1 = getInventory().findItemByString(itemToUseOn);
+
+        if (i1 == null) {
+            i1 = findItemInRoom(itemToUseOn);
+        }
+
+        if (i == null) {
+            returnString = "You have no " + itemToUse + " to use";
+        } else if (i1 == null) {
+            returnString = "There is no " + itemToUseOn + " to use " + itemToUse + " on";
+        } else {
+            if (i instanceof UsableOn) {
+                returnString = ((UsableOn)i).useOn(i1);
+                if (i.isConsumedOnUse()) {
+                    removeInventoryItem(i);
+                }
+            }
+            else {
+                returnString = "Nothing happens";
+            }
+        }
+
+        return returnString;
     }
 
     public String dropItem(String item) {

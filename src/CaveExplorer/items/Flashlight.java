@@ -1,18 +1,20 @@
-package CaveExplorer;
+package CaveExplorer.items;
 
-public class Flashlight extends Item implements Useable{
+import CaveExplorer.Usable;
+import CaveExplorer.Item;
+public class Flashlight extends Item implements Usable {
 
     private boolean isOn;
     private boolean hasBatteries;
 
-    public Flashlight(String name, String description, Boolean isOn, boolean hasBatteries) {
-        super(name, description);
+    public Flashlight(String name, String description, Boolean isOn, boolean hasBatteries , boolean isConsumedOnUse) {
+        super(name, description, isConsumedOnUse);
         this.isOn = isOn;
         this.hasBatteries = hasBatteries;
     }
 
     @Override
-    public String Use() {
+    public String use() {
         String returnString;
 
         if (hasBatteries) {
@@ -24,5 +26,10 @@ public class Flashlight extends Item implements Useable{
             returnString = "The flashlight is out of batteries";
         }
         return returnString;
+    }
+
+    public void insertBattery(Battery battery) {
+        hasBatteries = true;
+        battery = null;
     }
 }

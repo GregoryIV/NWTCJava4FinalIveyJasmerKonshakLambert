@@ -1,5 +1,5 @@
 package CaveExplorer;
-
+import CaveExplorer.items.*;
 public abstract class ItemHolder extends GameObject {
 
     private Inventory inventory;

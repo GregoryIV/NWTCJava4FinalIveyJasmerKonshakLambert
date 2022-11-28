@@ -16,19 +16,17 @@ public class LookCommand extends MasterCommand implements CommandWithParameter {
 
     @Override
     public String execute(String... parameters) {
-        int parameterLength;
         int parametersLength;
-
+        String returnString;
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
-            case 0:
-                return game.playerLook();
-            case 1:
-                return game.playerLookAt(parameters[0]);
-            default:
-                return "Too many parameters";
+            case 0 -> returnString = game.playerLook();
+            case 1 -> returnString = game.playerLookAt(parameters[0]);
+            default -> returnString = "Too many parameters";
         }
+
+        return returnString;
 
     }
 }

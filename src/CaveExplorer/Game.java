@@ -1,5 +1,10 @@
 package CaveExplorer;
 
+import CaveExplorer.items.Battery;
+import CaveExplorer.items.Dynamite;
+import CaveExplorer.items.Flashlight;
+import CaveExplorer.items.Pickaxe;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -24,10 +29,10 @@ public class Game {
         map = new ArrayList<Room>();
 
         //Create Items
-        Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up");
-        Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining");
-        Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, true);
-
+        Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up", true);
+        Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining", false);
+        Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, false, false);
+        Battery battery = new Battery("battery", "Shockingly good to have.", true);
         //Create Rooms
         Room caveEntrance = new Room("A bleak cave","Cave Entrance");
         Room caveRoom2 = new Room("dark cave","Cave room 2");
@@ -61,6 +66,7 @@ public class Game {
         //Create Player
         Inventory playerInventory = new Inventory();
         playerInventory.add(flashlight);
+        playerInventory.add(battery);
         player = new Player("Adventurer1","A bold cave diver.", caveEntrance, playerInventory);
 
     }

@@ -16,6 +16,7 @@ public class Parser {
         UseCommand useCommand = new UseCommand(game,"use");
         InventoryCommand inventoryCommand = new InventoryCommand(game,"inventory");
         DropCommand dropCommand = new DropCommand(game,"drop");
+        HelpCommand helpCommand = new HelpCommand(game, "help");
 
         moveCommand.addSynonym("walk");
         moveCommand.addSynonym("go");
@@ -29,19 +30,22 @@ public class Parser {
 
         inventoryCommand.addSynonym("i");
 
+        helpCommand.addSynonym("?");
+
         commandList.add(moveCommand);
         commandList.add(lookCommand);
         commandList.add(takeCommand);
         commandList.add(dropCommand);
         commandList.add(inventoryCommand);
         commandList.add(useCommand);
+        commandList.add(helpCommand);
     }
 
     private static String processCommand(ArrayList<String> commands) {
 
         CommandWithParameter c;
         String msg = "";
-        String[] parameters = ((commands.size()>1) ? commands.subList(1, commands.size()).toArray(new String[0]) : null);;
+        String[] parameters = ((commands.size()>1) ? commands.subList(1, commands.size()).toArray(new String[0]) : null);
 
         c = commandList.findCommandWithParameter(commands.get(0));
 
