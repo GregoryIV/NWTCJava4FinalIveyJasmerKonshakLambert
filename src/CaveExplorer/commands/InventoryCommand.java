@@ -3,7 +3,6 @@ package CaveExplorer.commands;
 import CaveExplorer.Game;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class InventoryCommand extends MasterCommand implements CommandWithParameter {
 
@@ -23,12 +22,8 @@ public class InventoryCommand extends MasterCommand implements CommandWithParame
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
-            case 0:
-                returnString = game.ShowPlayerInventory();
-                break;
-            default:
-                returnString = "Too many parameters";
-                break;
+            case 0 -> returnString = game.ShowPlayerInventory();
+            default -> returnString = "Too many parameters";
         }
 
         return returnString;

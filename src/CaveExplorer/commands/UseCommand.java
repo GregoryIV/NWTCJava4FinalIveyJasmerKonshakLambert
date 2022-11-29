@@ -22,15 +22,10 @@ public class UseCommand extends MasterCommand implements CommandWithParameter{
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
-            case 1:
-                returnString = game.playerUseItem(parameters[0]);
-                break;
-            case 2:
-                returnString = game.playerUseItemOn(parameters[0],parameters[1]);
-                break;
-            default:
-                returnString = "Too many parameters";
-
+            case 0 -> returnString = "The use command requires at 1 item";
+            case 1 -> returnString = game.playerUseItem(parameters[0]);
+            case 2 -> returnString = game.playerUseItemOn(parameters[0],parameters[1]);
+            default -> returnString = "Too many parameters";
         }
 
         return returnString;

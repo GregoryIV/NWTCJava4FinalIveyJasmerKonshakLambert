@@ -22,11 +22,9 @@ public class DropCommand extends MasterCommand implements CommandWithParameter{
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
-            case 1:
-                returnString = game.playerDropItem(parameters[0]);
-                break;
-            default:
-                returnString = "Too many parameters";
+            case 0 -> returnString = "The drop command is requires 1 item";
+            case 1 -> returnString = game.playerDropItem(parameters[0]);
+            default -> returnString = "Too many parameters";
 
         }
 
