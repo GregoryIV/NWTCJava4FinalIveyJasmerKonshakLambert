@@ -26,12 +26,6 @@ public class Game {
         //Create map
         map = new ArrayList<Room>();
 
-        //Create Items
-        Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up", true);
-        Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining", false);
-        Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, false, false);
-        Battery battery = new Battery("battery", "Shockingly good to have.", true);
-        Flint flint = new Flint("flint", "Useful to start things on fire", true);
 
         //Create Rooms
         Room caveEntrance = new Room("A bleak cave","Cave Entrance");
@@ -39,6 +33,14 @@ public class Game {
         Room caveRoom3 = new Room("damp cave","Cave room 3");
         Room caveRoom4 = new Room("cave cave", "Cave room 4");
         Room caveRoom5 = new Room("cave description", "Cave room 5");
+        Room caveExit = new Room("To exit the cave", "Cave Exit");
+
+        //Create Items
+        Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up", true, caveExit);
+        Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining", false);
+        Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, false, false);
+        Battery battery = new Battery("battery", "Shockingly good to have.", true);
+        Flint flint = new Flint("flint", "Useful to start things on fire", true);
 
         //Create Room Inventories
         Inventory caveEntranceInventory = new Inventory();
@@ -51,7 +53,7 @@ public class Game {
         caveRoom5Inventory.add(dynamite);
 
         //Map out rooms and initialize inventories
-        caveEntrance.initializeRoom(null,null,caveRoom2,null,caveEntranceInventory);
+        caveEntrance.initializeRoom(null,null,caveRoom2,caveExit,caveEntranceInventory);
         caveRoom2.initializeRoom(caveRoom3,null,null,caveEntrance,caveRoom2Inventory);
         caveRoom3.initializeRoom(caveRoom5,caveRoom2,caveRoom4,null,caveRoom3Inventory);
         caveRoom4.initializeRoom(null,null,null,caveRoom3,caveRoom4Inventory);
@@ -62,12 +64,16 @@ public class Game {
         map.add(caveRoom3);
         map.add(caveRoom4);
         map.add(caveRoom5);
+        map.add(caveExit);
+        caveExit.setLocked(true);
+        caveExit.setLockedStatus("Exit is blocked by rocks.");
 
         //Create Player
         Inventory playerInventory = new Inventory();
         playerInventory.add(flashlight);
         playerInventory.add(battery);
         playerInventory.add(flint);
+        playerInventory.add(dynamite);
         player = new Player("Adventurer1","A bold cave diver.", caveEntrance, playerInventory);
 
     }
@@ -116,5 +122,7 @@ public class Game {
     public Inventory getPlayerInventory() {return player.getInventory();}
 
     public Inventory getCurrentRoomInventory () {return player.getCurrentRoom().getInventory();}
+
+    public Room getPlayerRoom (){return player.getCurrentRoom();}
 
 }

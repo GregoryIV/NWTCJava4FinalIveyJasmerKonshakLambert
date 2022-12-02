@@ -13,7 +13,7 @@ import java.util.Locale;
 public class CaveExplorer {
 
     //1.4
-    static Game game;
+    public static Game game;
 
     public static void main(String[] args) throws IOException {
         String input;
