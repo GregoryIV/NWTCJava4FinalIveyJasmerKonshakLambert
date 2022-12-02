@@ -13,10 +13,10 @@ public class CommandList extends ArrayList<Command> {
         return null;
     }
 
-    public CommandWithParameter findCommandWithParameter(String command) {
+    public GameCommand findCommandWithParameter(String command) {
         for (Command c: this) {
-            if (c instanceof CommandWithParameter & (c.getName().equals(command) || c.containsSynonym(command))) {
-                return (CommandWithParameter)c;
+            if (c instanceof GameCommand & (c.getName().equals(command) || c.containsSynonym(command))) {
+                return (GameCommand)c;
             }
         }
 
@@ -34,7 +34,7 @@ public class CommandList extends ArrayList<Command> {
 
     public String getCommandDetails(String command) {
         StringBuilder returnString = new StringBuilder();
-        CommandWithParameter c;
+        GameCommand c;
 
         c = this.findCommandWithParameter(command);
         if (c == null) {

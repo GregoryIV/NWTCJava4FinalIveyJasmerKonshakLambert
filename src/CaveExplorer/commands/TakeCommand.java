@@ -4,7 +4,7 @@ import CaveExplorer.Game;
 
 import java.util.ArrayList;
 
-public class TakeCommand extends MasterCommand implements CommandWithParameter {
+public class TakeCommand extends MasterCommand implements GameCommand {
 
     public TakeCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);

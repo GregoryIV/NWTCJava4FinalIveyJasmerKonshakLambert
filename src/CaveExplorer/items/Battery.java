@@ -4,7 +4,6 @@ import CaveExplorer.globals.UsableOn;
 
 public class Battery extends Item implements UsableOn {
 
-
     public Battery(String name, String description, boolean isConsumedOnUse) {
         super(name, description, isConsumedOnUse);
     }

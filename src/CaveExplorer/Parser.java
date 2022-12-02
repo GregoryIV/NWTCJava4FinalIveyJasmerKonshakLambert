@@ -7,90 +7,84 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    private static CommandList commandList = new CommandList();
+    private static CommandFactory commandFactory = new CommandFactory(CaveExplorer.game);
 
-    public static void initializeCommandList(Game game) {
-        LookCommand lookCommand = new LookCommand(game,"look");
-        MoveCommand moveCommand = new MoveCommand(game,"move");
-        TakeCommand takeCommand = new TakeCommand(game,"take");
-        UseCommand useCommand = new UseCommand(game,"use");
-        InventoryCommand inventoryCommand = new InventoryCommand(game,"inventory");
-        DropCommand dropCommand = new DropCommand(game,"drop");
-        HelpCommand helpCommand = new HelpCommand(game, "help", commandList);
+    /**
+     *  Converts the user input into commands for the game.
+     *
+     * @param userInput - input provided by the user.
+     * @return - Message back to the user
+     */
+    public static String parseUserInput(String userInput) {
+        String userMessage = "";
 
-        moveCommand.addSynonym("walk");
-        moveCommand.addSynonym("go");
+        ArrayList<String> userCommands = sanitizeUserInput(userInput);
 
-        lookCommand.addSynonym("inspect");
-        lookCommand.addSynonym("describe");
-        lookCommand.addSynonym("investigate");
-
-        takeCommand.addSynonym("grab");
-        takeCommand.addSynonym("pickup");
-
-        inventoryCommand.addSynonym("i");
-
-        helpCommand.addSynonym("?");
-
-        commandList.add(moveCommand);
-        commandList.add(lookCommand);
-        commandList.add(takeCommand);
-        commandList.add(dropCommand);
-        commandList.add(inventoryCommand);
-        commandList.add(useCommand);
-        commandList.add(helpCommand);
+        if (userCommands.size() == 0) {
+            userMessage = "You must write a command!";
+        } else if (userCommands.size() > 3) {
+            userMessage = "That command is too long!";
+        } else {
+            userMessage = processUserCommand(userCommands);
+        }
+        return userMessage;
     }
 
-    private static String processCommand(ArrayList<String> commands) {
+    /**
+     * Sanitize the user input into a more friendly format.
+     * (lowercase, remove prepositions, splits into list)
+     *
+     * @param userInput - String of commands
+     * @return - ArrayList of word(s)
+     */
+    private static ArrayList<String> sanitizeUserInput(String userInput) {
+        String[] sanitizedInput = userInput.toLowerCase().split("\\s+");
+        ArrayList<String> userCommands = new ArrayList<>();
 
-        CommandWithParameter c;
+        for (String command : sanitizedInput) {
+            userCommands.add(command);
+        }
+
+        removePrepositions(userCommands);
+
+        return userCommands;
+
+    }
+
+    /**
+     * Removes prepositions from the list of user commands.
+     *
+     * @param userCommands - List of commands provided by the user
+     */
+    private static void removePrepositions(ArrayList<String> userCommands) {
+        List<String> prepositions = Arrays.asList("on","in");
+
+        userCommands.removeAll(prepositions);
+
+    }
+
+    /**
+     * Takes user commands and converts them into game commands.
+     * Executes any game commands found.
+     *
+     * @param userCommands - List of commands provided by the user
+     * @return
+     */
+    private static String processUserCommand(ArrayList<String> userCommands) {
+
+        GameCommand gameCommand;
         String msg = "";
-        String[] parameters = ((commands.size()>1) ? commands.subList(1, commands.size()).toArray(new String[0]) : null);
+        String[] parameters = ((userCommands.size()>1) ? userCommands.subList(1, userCommands.size()).toArray(new String[0]) : null);
 
-        c = commandList.findCommandWithParameter(commands.get(0));
+        gameCommand = commandFactory.getCommand(userCommands.get(0));
 
-        if (c == null) {
-            msg = "Can't do this because '" + commands.get(0) + "' is not a command!";
+        if (gameCommand == null) {
+            msg = "Can't do this because '" + userCommands.get(0) + "' is not a command!";
         } else {
-            msg = c.execute(parameters);
+            msg = gameCommand.execute(parameters);
         }
 
         return msg;
     }
 
-    public static String parseUserInput(String userinput) {
-        String returnString = "";
-
-        ArrayList<String> commands = sanitizeUserInput(userinput);
-
-        if (commands.size() == 0) {
-            returnString = "You must write a command!";
-        } else if (commands.size() > 3) {
-            returnString = "That command is too long!";
-        } else {
-            returnString = processCommand(commands);
-        }
-        return returnString;
-    }
-
-    private static ArrayList<String> sanitizeUserInput(String userInput) {
-        String[] sanitizedInput = userInput.toLowerCase().split("\\s+");
-        ArrayList<String> commands = new ArrayList<>();
-
-        for (String command : sanitizedInput) {
-            commands.add(command);
-        }
-
-        removePrepositions(commands);
-
-        return commands;
-
-    }
-
-    private static void removePrepositions(ArrayList<String> commands) {
-        List<String> prepositions = Arrays.asList("on","in");
-
-        commands.removeAll(prepositions);
-
-    }
 }

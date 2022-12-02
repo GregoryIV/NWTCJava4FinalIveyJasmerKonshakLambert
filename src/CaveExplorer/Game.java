@@ -18,24 +18,28 @@ public class Game {
     private ArrayList<Room> map;
     private Player player;
 
+    private boolean continueGame = true;
+
     /**
      * Game constructor instantiates all the game objects
      */
     public Game() {
-
-        Parser.initializeCommandList(this);
 
         //Create map
         map = new ArrayList<Room>();
 
 
         //Create Rooms
-        Room caveEntrance = new Room("A bleak cave","Cave Entrance");
-        Room caveRoom2 = new Room("dark cave","Cave room 2");
-        Room caveRoom3 = new Room("damp cave","Cave room 3");
-        Room caveRoom4 = new Room("cave cave", "Cave room 4");
-        Room caveRoom5 = new Room("cave description", "Cave room 5");
-        Room caveExit = new Room("To exit the cave", "Cave Exit");
+        Room caveEntrance = new Room.RoomBuilder("A bleak cave","Cave Entrance").build();
+        Room caveRoom2 = new Room.RoomBuilder("dark cave","Cave room 2").build();
+        Room caveRoom3 = new Room.RoomBuilder("damp cave","Cave room 3").build();
+        Room caveRoom4 = new Room.RoomBuilder("cave cave", "Cave room 4").build();
+        Room caveRoom5 = new Room.RoomBuilder("cave description", "Cave room 5").build();
+        Room caveExit = new Room.RoomBuilder("To exit the cave", "Cave Exit")
+                                .setisGameExit(true)
+                                .setLockedStatus("Exit is blocked by rocks.")
+                                .setIsLocked(true)
+                                .build();
 
         //Create Items
         Dynamite dynamite = new Dynamite("dynamite","Useful for blowing stuff up", true, caveExit);
@@ -60,6 +64,7 @@ public class Game {
         caveRoom3.initializeRoom(caveRoom5,caveRoom2,caveRoom4,null,caveRoom3Inventory);
         caveRoom4.initializeRoom(null,null,null,caveRoom3,caveRoom4Inventory);
         caveRoom5.initializeRoom(null,caveRoom3,null,null,caveRoom5Inventory);
+        caveExit.initializeRoom(null,null,caveEntrance,null,null);
 
         map.add(caveEntrance);
         map.add(caveRoom2);
@@ -67,8 +72,6 @@ public class Game {
         map.add(caveRoom4);
         map.add(caveRoom5);
         map.add(caveExit);
-        caveExit.setLocked(true);
-        caveExit.setLockedStatus("Exit is blocked by rocks.");
 
         //Create Player
         Inventory playerInventory = new Inventory();
@@ -107,7 +110,16 @@ public class Game {
     }
 
     public String MovePlayer(Direction d) {
-        return player.move(d);
+        String userMessage;
+
+        userMessage = player.move(d);
+
+        if (player.getCurrentRoom().isGameExit()) {
+            continueGame = false;
+            return "You win";
+        }
+
+        return userMessage;
     }
     public String ShowPlayerInventory() {return player.printInventory();}
     public String playerLook() {return player.look();}
@@ -126,5 +138,7 @@ public class Game {
     public Inventory getCurrentRoomInventory () {return player.getCurrentRoom().getInventory();}
 
     public Room getPlayerRoom (){return player.getCurrentRoom();}
+
+    public Boolean getContinueGame() {return continueGame;}
 
 }

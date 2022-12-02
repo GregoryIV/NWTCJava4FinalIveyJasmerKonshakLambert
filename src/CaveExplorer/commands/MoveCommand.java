@@ -5,7 +5,7 @@ import CaveExplorer.Game;
 
 import java.util.ArrayList;
 
-public class MoveCommand extends MasterCommand implements CommandWithParameter {
+public class MoveCommand extends MasterCommand implements GameCommand {
 
     public MoveCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);

@@ -32,8 +32,7 @@ public class CaveExplorer {
 
             System.out.println(output);
 
-            //continueGame = false;
-        } while (continueGame);
+        } while (game.getContinueGame());
     }
 
     //Testing resource bundles for english/spanish game intro messages

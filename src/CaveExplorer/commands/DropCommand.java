@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * 1.2 example of inheritance and interface
  */
-public class DropCommand extends MasterCommand implements CommandWithParameter{
+public class DropCommand extends MasterCommand implements GameCommand {
 
     //1.3 Use of overloaded constructor
     public DropCommand(Game game, String name, ArrayList<String> synonyms) {

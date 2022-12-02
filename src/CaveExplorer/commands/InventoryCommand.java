@@ -4,7 +4,7 @@ import CaveExplorer.Game;
 
 import java.util.ArrayList;
 
-public class InventoryCommand extends MasterCommand implements CommandWithParameter {
+public class InventoryCommand extends MasterCommand implements GameCommand {
 
     public InventoryCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);

@@ -19,7 +19,7 @@ public class Dynamite extends Item implements Usable {
         Room playerRoom = CaveExplorer.game.getPlayerRoom();
         Inventory playerInventory = CaveExplorer.game.getPlayerInventory();
 
-        if(playerRoom.getName().equals("Cave Entrance") && playerInventory.containsItemByString("flint")){
+        if(playerRoom.isAdjacentToRoom(roomExit) && playerInventory.contains("flint")){
             roomExit.setLocked(false);
             return "You blow stuff up";
         }

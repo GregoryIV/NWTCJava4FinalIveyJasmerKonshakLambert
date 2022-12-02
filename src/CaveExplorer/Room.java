@@ -9,8 +9,8 @@ public class Room extends ItemHolder {
 
     //Rooms locked are not able to be accessed
     private boolean isLocked;
-
     private String lockedStatus;
+    private boolean isGameExit;
 
     public Room() {
         super("","");
@@ -19,8 +19,48 @@ public class Room extends ItemHolder {
         this.eastRoom = null;
         this.westRoom = null;
     }
-    public Room(String description, String name) {
-        super(name,description);
+    private Room(RoomBuilder builder)
+    {
+        super(builder.name, builder.description);
+        this.isGameExit = builder.isGameExit;
+        this.isLocked = builder.isLocked;
+        this.lockedStatus = builder.lockedStatus;
+    }
+
+    //Builder Class
+    public static class RoomBuilder{
+        private String name;
+        private String description;
+
+        private Room northRoom,southRoom,eastRoom, westRoom;
+        private boolean isLocked = false;
+        private String lockedStatus = "";
+        private boolean isGameExit = false;
+
+        public RoomBuilder(String description, String name){
+            this.name = name;
+            this.description = description;
+        }
+
+        public RoomBuilder setIsLocked(boolean isLocked) {
+            this.isLocked = isLocked;
+            return this;
+        }
+
+        public RoomBuilder setLockedStatus(String lockedStatus) {
+            this.lockedStatus = lockedStatus;
+            return this;
+        }
+
+        public RoomBuilder setisGameExit(boolean isGameExit) {
+            this.isGameExit = isGameExit;
+            return this;
+        }
+
+        public Room build(){
+            return new Room(this);
+        }
+
     }
 
     public void initializeRoom(Room northRoom, Room southRoom,
@@ -29,9 +69,10 @@ public class Room extends ItemHolder {
         this.southRoom = southRoom;
         this.eastRoom = eastRoom;
         this.westRoom = westRoom;
+        this.isGameExit = isGameExit;
         setInventory(inventory);
     }
-
+    
     public Room getEastRoom() {
         return eastRoom;
     }
@@ -64,6 +105,20 @@ public class Room extends ItemHolder {
         this.westRoom = westRoom;
     }
 
+    public boolean isAdjacentToRoom(Room room) {
+        boolean isAdjacent = false;
+
+        if (northRoom != null && northRoom.equals(room) ||
+            southRoom != null && southRoom.equals(room) ||
+            eastRoom != null && eastRoom.equals(room) ||
+            westRoom != null && westRoom.equals(room)) {
+            isAdjacent = true;
+        }
+
+        return isAdjacent;
+
+    }
+
     public boolean getLocked() {return isLocked;}
 
     public void setLocked(boolean isLocked) {this.isLocked = isLocked;}
@@ -94,4 +149,6 @@ public class Room extends ItemHolder {
         }
 
     }
+
+    public boolean isGameExit() {return isGameExit;}
 }
