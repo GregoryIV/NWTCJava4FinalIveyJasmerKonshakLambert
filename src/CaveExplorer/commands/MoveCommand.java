@@ -24,6 +24,9 @@ public class MoveCommand extends MasterCommand implements CommandWithParameter {
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
+            case 0:
+                returnString = "The move command requires a direction.";
+                break;
             case 1:
 
                 d = Direction.findByString(parameters[0]);
@@ -38,8 +41,6 @@ public class MoveCommand extends MasterCommand implements CommandWithParameter {
                 returnString = "Too many parameters";
                 break;
         }
-
-
 
         return returnString;
     }

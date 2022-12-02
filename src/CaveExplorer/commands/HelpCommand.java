@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 public class HelpCommand extends MasterCommand implements CommandWithParameter {
 
-    public HelpCommand(Game game, String name, ArrayList<String> synonyms) {
+    private CommandList commandList;
+    public HelpCommand(Game game, String name, ArrayList<String> synonyms, CommandList commandList) {
         super(game, name, synonyms);
+        this.commandList = commandList;
     }
 
-    public HelpCommand(Game game, String name) {
+    public HelpCommand(Game game, String name, CommandList commandList) {
         super(game,name);
+        this.commandList = commandList;
     }
 
     @Override
@@ -23,9 +26,9 @@ public class HelpCommand extends MasterCommand implements CommandWithParameter {
 
         switch (parametersLength) {
             //TODO - Print list of all commands
-            case 0 -> returnString = "List of all commands";
+            case 0 -> returnString = commandList.getCommandList();
             //TODO - Print details for a specific command
-            case 1 ->  returnString = "Details about the " + parameters[0] + " command";
+            case 1 ->  returnString = commandList.getCommandDetails(parameters[0]);
             default -> returnString = "Too many parameters";
         }
 

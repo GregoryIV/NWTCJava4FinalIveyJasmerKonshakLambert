@@ -16,7 +16,7 @@ public class Parser {
         UseCommand useCommand = new UseCommand(game,"use");
         InventoryCommand inventoryCommand = new InventoryCommand(game,"inventory");
         DropCommand dropCommand = new DropCommand(game,"drop");
-        HelpCommand helpCommand = new HelpCommand(game, "help");
+        HelpCommand helpCommand = new HelpCommand(game, "help", commandList);
 
         moveCommand.addSynonym("walk");
         moveCommand.addSynonym("go");

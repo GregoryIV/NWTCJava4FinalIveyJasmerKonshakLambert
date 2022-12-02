@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
  */
 public class Game {
 
+    //1.1 proper use of visibility modifier
     private ArrayList<Room> map;
     private Player player;
 
@@ -33,6 +34,7 @@ public class Game {
         Pickaxe pickaxe = new Pickaxe("pickaxe","Useful for mining", false);
         Flashlight flashlight = new Flashlight("flashlight", "Really lights up the room", false, false, false);
         Battery battery = new Battery("battery", "Shockingly good to have.", true);
+
         //Create Rooms
         Room caveEntrance = new Room("A bleak cave","Cave Entrance");
         Room caveRoom2 = new Room("dark cave","Cave room 2");

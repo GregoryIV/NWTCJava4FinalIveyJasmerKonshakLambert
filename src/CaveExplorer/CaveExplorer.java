@@ -3,6 +3,7 @@ package CaveExplorer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
 
@@ -10,6 +11,8 @@ import java.util.Locale;
  *
  */
 public class CaveExplorer {
+
+    //1.4
     static Game game;
 
     public static void main(String[] args) throws IOException {
@@ -19,7 +22,7 @@ public class CaveExplorer {
         boolean continueGame = true;
 
         game = new Game();
-        //testLocaleIntro();
+        game.showIntro(LocalTime.from(LocalDateTime.now()), new Locale.Builder().setLanguage("en").build());
 
         do {
             System.out.print("> ");
