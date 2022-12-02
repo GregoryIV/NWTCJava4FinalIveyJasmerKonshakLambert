@@ -1,7 +1,7 @@
 package CaveExplorer.items;
 
-import CaveExplorer.Item;
-import CaveExplorer.UsableOn;
+import CaveExplorer.globals.UsableOn;
+
 public class Battery extends Item implements UsableOn {
 
 

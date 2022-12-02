@@ -1,4 +1,4 @@
-package CaveExplorer;
+package CaveExplorer.globals;
 
 public enum Direction {
     North,

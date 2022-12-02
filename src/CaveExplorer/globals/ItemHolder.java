@@ -1,4 +1,6 @@
-package CaveExplorer;
+package CaveExplorer.globals;
+import CaveExplorer.Inventory;
+import CaveExplorer.globals.GameObject;
 import CaveExplorer.items.*;
 public abstract class ItemHolder extends GameObject {
 

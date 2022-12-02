@@ -1,7 +1,7 @@
 package CaveExplorer.items;
 
-import CaveExplorer.Usable;
-import CaveExplorer.Item;
+import CaveExplorer.globals.Usable;
+
 public class Pickaxe extends Item implements Usable {
 
     public Pickaxe(String name, String description, boolean isConsumedOnUse) {

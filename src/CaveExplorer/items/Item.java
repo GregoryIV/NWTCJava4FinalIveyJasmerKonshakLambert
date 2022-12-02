@@ -1,6 +1,6 @@
-package CaveExplorer;
+package CaveExplorer.items;
 
-import CaveExplorer.GameObject;
+import CaveExplorer.globals.GameObject;
 
 public abstract class Item extends GameObject {
     private boolean isConsumedOnUse;

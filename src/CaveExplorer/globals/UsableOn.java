@@ -1,4 +1,4 @@
-package CaveExplorer;
+package CaveExplorer.globals;
 
 import CaveExplorer.items.*;
 public interface UsableOn {

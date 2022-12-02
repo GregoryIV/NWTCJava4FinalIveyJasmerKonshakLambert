@@ -1,4 +1,4 @@
-package CaveExplorer;
+package CaveExplorer.globals;
 
 public abstract class GameObject {
     private String name;

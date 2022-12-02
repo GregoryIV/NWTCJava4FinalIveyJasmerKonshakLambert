@@ -2,9 +2,9 @@ package CaveExplorer.items;
 
 import CaveExplorer.CaveExplorer;
 import CaveExplorer.Room;
-import CaveExplorer.Usable;
-import CaveExplorer.Item;
 import CaveExplorer.Inventory;
+import CaveExplorer.globals.Usable;
+
 public class Dynamite extends Item implements Usable {
     private Room roomExit;
 

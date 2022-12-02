@@ -1,5 +1,8 @@
 package CaveExplorer;
 
+import CaveExplorer.globals.Direction;
+import CaveExplorer.globals.ItemHolder;
+
 public class Room extends ItemHolder {
     //Stores the rooms for all four cardinal directions
     private Room northRoom,southRoom,eastRoom, westRoom;

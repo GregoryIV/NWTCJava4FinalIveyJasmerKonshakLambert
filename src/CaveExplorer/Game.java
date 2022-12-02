@@ -1,5 +1,7 @@
 package CaveExplorer;
 
+import CaveExplorer.globals.Direction;
+import CaveExplorer.globals.Times;
 import CaveExplorer.items.*;
 
 import java.time.LocalTime;

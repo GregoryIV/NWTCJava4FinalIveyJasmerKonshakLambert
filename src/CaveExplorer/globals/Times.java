@@ -1,4 +1,4 @@
-package CaveExplorer;
+package CaveExplorer.globals;
 
 import java.time.LocalTime;
 

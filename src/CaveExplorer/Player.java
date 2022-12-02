@@ -1,9 +1,12 @@
 package CaveExplorer;
 
+import CaveExplorer.globals.*;
+import CaveExplorer.items.Item;
+
 /**
  * Represents a player in the game from a first-person perspective.
  */
-public class Player extends ItemHolder implements Movable{
+public class Player extends ItemHolder implements Movable {
 
     //The current room that the player is in
     private Room currentRoom;

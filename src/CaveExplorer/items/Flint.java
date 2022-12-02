@@ -1,7 +1,6 @@
 package CaveExplorer.items;
 
-import CaveExplorer.Item;
-import CaveExplorer.Usable;
+import CaveExplorer.globals.Usable;
 
 public class Flint extends Item implements Usable {
     public Flint(String name, String description, boolean isConsumedOnUse) {

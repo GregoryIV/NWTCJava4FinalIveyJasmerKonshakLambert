@@ -1,7 +1,7 @@
 package CaveExplorer.items;
 
-import CaveExplorer.Usable;
-import CaveExplorer.Item;
+import CaveExplorer.globals.Usable;
+
 public class Flashlight extends Item implements Usable {
 
     private boolean isOn;
