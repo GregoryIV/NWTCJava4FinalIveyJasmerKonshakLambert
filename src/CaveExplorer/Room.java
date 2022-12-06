@@ -2,7 +2,12 @@ package CaveExplorer;
 
 import CaveExplorer.globals.Direction;
 import CaveExplorer.globals.ItemHolder;
+import CaveExplorer.items.Item;
 
+/**
+ *
+ *
+ */
 public class Room extends ItemHolder {
     //Stores the rooms for all four cardinal directions
     private Room northRoom,southRoom,eastRoom, westRoom;
@@ -12,13 +17,6 @@ public class Room extends ItemHolder {
     private String lockedStatus;
     private boolean isGameExit;
 
-    public Room() {
-        super("","");
-        this.northRoom = null;
-        this.southRoom = null;
-        this.eastRoom = null;
-        this.westRoom = null;
-    }
     private Room(RoomBuilder builder)
     {
         super(builder.name, builder.description);
@@ -27,7 +25,7 @@ public class Room extends ItemHolder {
         this.lockedStatus = builder.lockedStatus;
     }
 
-    //Builder Class
+    //2.? Design pattern - Builder Pattern
     public static class RoomBuilder{
         private String name;
         private String description;
@@ -151,4 +149,8 @@ public class Room extends ItemHolder {
     }
 
     public boolean isGameExit() {return isGameExit;}
+
+    public Item findItem(String item) {
+        return getInventory().findItemByString(item);
+    }
 }

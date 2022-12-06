@@ -1,5 +1,7 @@
 package CaveExplorer;
 
+import CaveExplorer.exceptions.GameErrorException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,11 +10,11 @@ import java.time.LocalTime;
 import java.util.Locale;
 
 /**
- *
+ * Runs the game.
  */
 public class CaveExplorer {
 
-    //1.4
+    //1.5 use of static keyword
     public static Game game;
 
     public static void main(String[] args) throws IOException {
@@ -28,7 +30,12 @@ public class CaveExplorer {
             System.out.print("> ");
             input = inputReader.readLine();
 
-            output = Parser.parseUserInput(input);
+            //6.1 Proper use of Try-Catch blocks
+            try {
+                output = Parser.parseUserInput(input);
+            } catch (GameErrorException ex) {
+                output = ex.getMessage();
+            }
 
             System.out.println(output);
 

@@ -2,6 +2,10 @@ package CaveExplorer.commands;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * 3.2 Use of ArrayList
+ */
 public class CommandList extends ArrayList<Command> {
     public Command findCommand(String command){
         for (Command c: this) {
@@ -26,7 +30,12 @@ public class CommandList extends ArrayList<Command> {
     public String getCommandList() {
         StringBuilder returnString = new StringBuilder();
 
-        this.forEach(command -> returnString.append(command.getName() + "\n"));
+        //3.5 Valid example of a foreach statement
+        //2.1 Use of lambda expression
+        //4.1 Use of variable in lambda expression
+        this.forEach(command -> {
+            returnString.append(command.getName() + "\n");
+        });
 
         return returnString.toString().trim();
 
@@ -34,9 +43,9 @@ public class CommandList extends ArrayList<Command> {
 
     public String getCommandDetails(String command) {
         StringBuilder returnString = new StringBuilder();
-        GameCommand c;
+        Command c;
 
-        c = this.findCommandWithParameter(command);
+        c = this.findCommand(command);
         if (c == null) {
             returnString.append("Command " + command + " does not exist.");
         } else {

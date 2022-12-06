@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * 1.2 example of inheritance and interface
  */
-public class DropCommand extends MasterCommand implements GameCommand {
+public class DropCommand extends Command implements GameCommand {
 
     //1.3 Use of overloaded constructor
     public DropCommand(Game game, String name, ArrayList<String> synonyms) {
@@ -20,8 +20,10 @@ public class DropCommand extends MasterCommand implements GameCommand {
     }
 
     /**
+     * Runs the player drop command
      *
      * 1.4 use of overridden method
+     * 1.9 Proper use of @Override notation
      * @param parameters
      * @return
      */
@@ -36,7 +38,6 @@ public class DropCommand extends MasterCommand implements GameCommand {
             case 0 -> returnString = "The drop command is requires 1 item";
             case 1 -> returnString = game.playerDropItem(parameters[0]);
             default -> returnString = "Too many parameters";
-
         }
 
         return returnString;

@@ -2,6 +2,10 @@ package CaveExplorer.commands;
 
 import CaveExplorer.Game;
 
+/**
+ * Retrieve game command
+ * 2.? Design pattern - Factory Pattern
+ */
 public class CommandFactory {
     private static CommandList commandList = new CommandList();
 

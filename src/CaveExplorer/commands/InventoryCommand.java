@@ -1,10 +1,11 @@
 package CaveExplorer.commands;
 
 import CaveExplorer.Game;
+import CaveExplorer.exceptions.GameCommandErrorException;
 
 import java.util.ArrayList;
 
-public class InventoryCommand extends MasterCommand implements GameCommand {
+public class InventoryCommand extends Command implements GameCommand {
 
     public InventoryCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);
@@ -15,7 +16,7 @@ public class InventoryCommand extends MasterCommand implements GameCommand {
     }
 
     @Override
-    public String execute(String... parameters) {
+    public String execute(String... parameters) throws GameCommandErrorException {
         String returnString;
         int parametersLength;
 
@@ -23,7 +24,7 @@ public class InventoryCommand extends MasterCommand implements GameCommand {
 
         switch (parametersLength) {
             case 0 -> returnString = game.ShowPlayerInventory();
-            default -> returnString = "Too many parameters";
+            default -> throw new GameCommandErrorException("Too many parameters");
         }
 
         return returnString;

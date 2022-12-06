@@ -210,8 +210,9 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
+    //2.2 valid use of encapsulation
     private Item findItemInRoom(String item) {
-        return currentRoom.getInventory().findItemByString(item);
+        return currentRoom.findItem(item);
     }
 
 }

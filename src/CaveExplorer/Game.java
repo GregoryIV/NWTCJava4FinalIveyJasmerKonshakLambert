@@ -16,6 +16,8 @@ public class Game {
 
     //1.1 proper use of visibility modifier
     private ArrayList<Room> map;
+
+    //1.7 Use of nested class
     private Player player;
 
     private boolean continueGame = true;
@@ -85,11 +87,11 @@ public class Game {
 
     /**
      * Displays the game's introduction based on time and locale
-     *
+     * 5.1 Use of dates and times in your application.
+     * 5.3 Proper use of String localization.
      * @param time
      * @param locale
      */
-
     public void showIntro (LocalTime time, Locale locale) {
         String introMessage = "";
         ResourceBundle rb = ResourceBundle.getBundle("CaveExplorer", locale);
@@ -122,8 +124,9 @@ public class Game {
         return userMessage;
     }
     public String ShowPlayerInventory() {return player.printInventory();}
-    public String playerLook() {return player.look();}
 
+    //2.2 valid use of encapsulation
+    public String playerLook() {return player.look();}
     public String playerLookAt(String gameObject) {return player.lookAt(gameObject);}
     public String playerTakeItem(String item) {return player.takeItem(item);}
 

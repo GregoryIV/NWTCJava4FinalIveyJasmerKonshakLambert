@@ -1,7 +1,7 @@
 package CaveExplorer.globals;
+
 import CaveExplorer.Inventory;
-import CaveExplorer.globals.GameObject;
-import CaveExplorer.items.*;
+import CaveExplorer.items.Item;
 public abstract class ItemHolder extends GameObject {
 
     private Inventory inventory;
@@ -21,11 +21,7 @@ public abstract class ItemHolder extends GameObject {
     public String getInventoryList() {
         StringBuilder inventoryList = new StringBuilder("");
 
-        inventoryList.append(getName() + "'s inventory\n");
-
-        inventory.forEach(item -> {
-            inventoryList.append(item.getName() + "\n");
-        });
+        inventoryList.append(getName() + "'s inventory\n" + inventory);
 
         return inventoryList.toString().trim();
     }

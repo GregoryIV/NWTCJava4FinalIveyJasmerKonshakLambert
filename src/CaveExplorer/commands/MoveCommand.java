@@ -1,11 +1,12 @@
 package CaveExplorer.commands;
 
-import CaveExplorer.globals.Direction;
 import CaveExplorer.Game;
+import CaveExplorer.exceptions.GameCommandErrorException;
+import CaveExplorer.globals.Direction;
 
 import java.util.ArrayList;
 
-public class MoveCommand extends MasterCommand implements GameCommand {
+public class MoveCommand extends Command implements GameCommand {
 
     public MoveCommand(Game game, String name, ArrayList<String> synonyms) {
         super(game,name,synonyms);
@@ -16,7 +17,7 @@ public class MoveCommand extends MasterCommand implements GameCommand {
     }
 
     @Override
-    public String execute(String... parameters) {
+    public String execute(String... parameters) throws GameCommandErrorException {
         Direction d;
         String returnString = "";
         int parametersLength;
@@ -25,21 +26,19 @@ public class MoveCommand extends MasterCommand implements GameCommand {
 
         switch (parametersLength) {
             case 0:
-                returnString = "The move command requires a direction.";
-                break;
+                throw new GameCommandErrorException("The move command requires a direction.");
             case 1:
 
                 d = Direction.findByString(parameters[0]);
 
-                if (d != null) {
-                    returnString = game.MovePlayer(d);
-                } else {
-                    returnString = parameters[0] + " is not a direction to move.";
+                if (d == null) {
+                    throw new GameCommandErrorException(parameters[0] + " is not a direction to move.");
                 }
+
+                returnString = game.MovePlayer(d);
                 break;
             default:
-                returnString = "Too many parameters";
-                break;
+                throw new GameCommandErrorException("Too many parameters");
         }
 
         return returnString;

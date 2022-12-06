@@ -1,5 +1,13 @@
 package CaveExplorer.commands;
 
-public interface GameCommand extends Command {
-    String execute(String... parameters);
+import CaveExplorer.exceptions.GameCommandErrorException;
+
+/**
+ *
+ * 4.3 Creation and use of a custom functional interface
+ * 4.4 Use of optional type
+ */
+@FunctionalInterface
+public interface GameCommand {
+    String execute(String... parameters) throws GameCommandErrorException;
 }

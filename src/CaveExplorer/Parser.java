@@ -1,11 +1,19 @@
 package CaveExplorer;
 
-import CaveExplorer.commands.*;
+import CaveExplorer.commands.CommandFactory;
+import CaveExplorer.commands.GameCommand;
+import CaveExplorer.exceptions.GameCommandErrorException;
+import CaveExplorer.exceptions.GameErrorException;
+import CaveExplorer.exceptions.InvalidUserInputException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Converts user input into game commands.
+ * Runs the game commands and returns relevant game knowledge to the user.
+ */
 public class Parser {
     private static CommandFactory commandFactory = new CommandFactory(CaveExplorer.game);
 
@@ -15,18 +23,27 @@ public class Parser {
      * @param userInput - input provided by the user.
      * @return - Message back to the user
      */
-    public static String parseUserInput(String userInput) {
+    public static String parseUserInput(String userInput) throws InvalidUserInputException, GameCommandErrorException {
         String userMessage = "";
 
         ArrayList<String> userCommands = sanitizeUserInput(userInput);
 
         if (userCommands.size() == 0) {
-            userMessage = "You must write a command!";
-        } else if (userCommands.size() > 3) {
-            userMessage = "That command is too long!";
-        } else {
-            userMessage = processUserCommand(userCommands);
+            throw new InvalidUserInputException("You must write a command!");
         }
+
+        if (userCommands.size() > 3) {
+            throw new InvalidUserInputException("That command has too many words!");
+        }
+
+        try {
+            userMessage = processUserCommand(userCommands);
+        } catch (InvalidUserInputException ex) {
+            throw ex;
+        } catch (GameCommandErrorException ex) {
+            throw ex;
+        }
+
         return userMessage;
     }
 
@@ -42,7 +59,9 @@ public class Parser {
         ArrayList<String> userCommands = new ArrayList<>();
 
         for (String command : sanitizedInput) {
-            userCommands.add(command);
+            if (command.length() > 1) {
+                userCommands.add(command);
+            }
         }
 
         removePrepositions(userCommands);
@@ -60,7 +79,6 @@ public class Parser {
         List<String> prepositions = Arrays.asList("on","in");
 
         userCommands.removeAll(prepositions);
-
     }
 
     /**
@@ -70,7 +88,7 @@ public class Parser {
      * @param userCommands - List of commands provided by the user
      * @return
      */
-    private static String processUserCommand(ArrayList<String> userCommands) {
+    private static String processUserCommand(ArrayList<String> userCommands) throws InvalidUserInputException, GameCommandErrorException {
 
         GameCommand gameCommand;
         String msg = "";
@@ -79,9 +97,13 @@ public class Parser {
         gameCommand = commandFactory.getCommand(userCommands.get(0));
 
         if (gameCommand == null) {
-            msg = "Can't do this because '" + userCommands.get(0) + "' is not a command!";
-        } else {
+            throw new InvalidUserInputException("Can't do this because '" + userCommands.get(0) + "' is not a command!");
+        }
+
+        try {
             msg = gameCommand.execute(parameters);
+        } catch (GameErrorException ex){
+            throw ex;
         }
 
         return msg;

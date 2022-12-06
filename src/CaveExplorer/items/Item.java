@@ -12,4 +12,9 @@ public abstract class Item extends GameObject {
     public boolean isConsumedOnUse() {
         return isConsumedOnUse;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

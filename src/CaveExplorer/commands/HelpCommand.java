@@ -1,10 +1,11 @@
 package CaveExplorer.commands;
 
 import CaveExplorer.Game;
+import CaveExplorer.exceptions.GameCommandErrorException;
 
 import java.util.ArrayList;
 
-public class HelpCommand extends MasterCommand implements GameCommand {
+public class HelpCommand extends Command implements GameCommand {
 
     private CommandList commandList;
     public HelpCommand(Game game, String name, ArrayList<String> synonyms, CommandList commandList) {
@@ -18,7 +19,7 @@ public class HelpCommand extends MasterCommand implements GameCommand {
     }
 
     @Override
-    public String execute(String... parameters) {
+    public String execute(String... parameters) throws GameCommandErrorException {
         String returnString;
         int parametersLength;
 
@@ -29,7 +30,7 @@ public class HelpCommand extends MasterCommand implements GameCommand {
             case 0 -> returnString = commandList.getCommandList();
             //TODO - Print details for a specific command
             case 1 ->  returnString = commandList.getCommandDetails(parameters[0]);
-            default -> returnString = "Too many parameters";
+            default -> throw new GameCommandErrorException("Too many parameters");
         }
 
         return returnString;

@@ -2,7 +2,12 @@ package CaveExplorer.globals;
 
 import java.time.LocalTime;
 
+/**
+ *
+ */
 public class Times {
+
+    //1.6 Proper use of the final keyword
     public static final LocalTime earlyMorningBeg = LocalTime.of(0,0,0);
     public static final LocalTime earlyMorningEnd = LocalTime.of(6,0,0);
 

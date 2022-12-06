@@ -22,6 +22,7 @@ public class Inventory extends ArrayList<Item> {
         }
         return false;
     }
+
     public Item findItemByString(String item){
         for (Item i: this) {
             if (i.getName().equals(item)) {
@@ -30,6 +31,18 @@ public class Inventory extends ArrayList<Item> {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder inventory = new StringBuilder();
+
+        // 2.1 use of lambda expression
+        this.forEach(item -> {
+            inventory.append(item + "\n");
+        });
+
+        return inventory.toString().trim();
     }
 
 }
