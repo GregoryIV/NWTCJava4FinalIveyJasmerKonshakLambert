@@ -2,9 +2,7 @@ package CaveExplorer;
 
 import CaveExplorer.exceptions.GameErrorException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
@@ -16,7 +14,6 @@ public class CaveExplorer {
 
     //1.5 use of static keyword
     public static Game game;
-
     public static void main(String[] args) throws IOException {
         String input;
         String output = "";
@@ -34,6 +31,7 @@ public class CaveExplorer {
             try {
                 output = Parser.parseUserInput(input);
             } catch (GameErrorException ex) {
+                appendToFile(ex);
                 output = ex.getMessage();
             }
 
@@ -42,45 +40,20 @@ public class CaveExplorer {
         } while (game.getContinueGame());
     }
 
-    //Testing resource bundles for english/spanish game intro messages
-    private static void testLocaleIntro() {
-        LocalTime earlyMorning = LocalTime.of(5,35,16);
-        LocalTime morning = LocalTime.of(8,55,55);
-        LocalTime noon = LocalTime.of(12,22,56);
-        LocalTime afternoon = LocalTime.of(16,5,0);
-        LocalTime evening = LocalTime.of(22,11,27);
-
-        Locale english = new Locale.Builder().setLanguage("en").build();
-        Locale spanish = new Locale.Builder().setLanguage("es").build();
-
-        //Early Morning Test
-        System.out.print("Early Morning Intro English: ");
-        game.showIntro(earlyMorning,english);
-        System.out.print("Early Morning Intro Spanish: ");
-        game.showIntro(earlyMorning,spanish);
-
-        //Morning Test
-        System.out.print("Morning Intro English: ");
-        game.showIntro(morning,english);
-        System.out.print("Morning Intro Spanish: ");
-        game.showIntro(morning,spanish);
-
-        //Noon Test
-        System.out.print("Noon Intro English: ");
-        game.showIntro(noon,english);
-        System.out.print("Noon Intro Spanish: ");
-        game.showIntro(noon,spanish);
-
-        //Afternoon Test
-        System.out.print("Afternoon Intro English: ");
-        game.showIntro(afternoon,english);
-        System.out.print("Afternoon Intro Spanish: ");
-        game.showIntro(afternoon,spanish);
-
-        //Evening Test
-        System.out.print("Evening Intro English: ");
-        game.showIntro(evening,english);
-        System.out.print("Evening Intro Spanish: ");
-        game.showIntro(evening,spanish);
+    /**
+     * Logging Method for writing exceptions to a log file
+     * 8.2 Demonstration of file writer class
+     * @param e The exception being logged
+     */
+    private static void appendToFile(Exception e) {
+        try {
+            FileWriter logFile = new FileWriter("Error-log.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(logFile);
+            PrintWriter printWriter = new PrintWriter(bufferedWriter, true);
+            e.printStackTrace(printWriter);
+        }
+        catch (Exception ie) {
+            throw new RuntimeException("Cannot write the Exception to file", ie);
+        }
     }
 }
