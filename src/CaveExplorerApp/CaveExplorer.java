@@ -17,14 +17,13 @@ public class CaveExplorer {
 
     /**
      * Main method to run the game.
-     * @param args
+     * @param args - Game arguments
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
         String input;
-        String output = "";
+        String output;
         BufferedReader inputReader  = new BufferedReader(new InputStreamReader(System.in));
-        boolean continueGame = true;
 
         game = new Game();
         game.showIntro(LocalTime.from(LocalDateTime.now()), new Locale.Builder().setLanguage("en").build());

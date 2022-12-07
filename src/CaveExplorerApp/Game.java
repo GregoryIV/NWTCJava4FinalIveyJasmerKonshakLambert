@@ -123,7 +123,7 @@ public class Game {
      * Tries to move the player in a given direction.
      * Fails to move if there is no exit in the given direction.
      *
-     * @param d - Direction to move the player
+     * @param directionToMove - Direction to move the player.
      * @return - Details about the moves
      */
     public String MovePlayer(Direction directionToMove) {
