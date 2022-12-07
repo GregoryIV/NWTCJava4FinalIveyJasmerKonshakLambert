@@ -3,7 +3,7 @@ package CaveExplorerApp.commands;
 import java.util.ArrayList;
 
 /**
- *
+ * List of commands
  * 3.2 Use of ArrayList
  */
 public class CommandList extends ArrayList<Command> {

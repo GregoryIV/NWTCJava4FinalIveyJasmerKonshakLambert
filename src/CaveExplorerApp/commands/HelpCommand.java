@@ -26,9 +26,7 @@ public class HelpCommand extends Command implements GameCommand {
         parametersLength = ((parameters == null) ? 0 : parameters.length);
 
         switch (parametersLength) {
-            //TODO - Print list of all commands
             case 0 -> returnString = commandList.getCommandList();
-            //TODO - Print details for a specific command
             case 1 ->  returnString = commandList.getCommandDetails(parameters[0]);
             default -> throw new GameCommandErrorException("Too many parameters");
         }
