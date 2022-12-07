@@ -1,0 +1,12 @@
+CaveExplorerApp.exceptions.InvalidUserInputException: Can't do this because 'we' is not a command!
+	at CaveExplorerApp.Parser.processUserCommand(Parser.java:100)
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:40)
+	at CaveExplorerApp.CaveExplorerApp.main(CaveExplorerApp.java:32)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:32)
+	at CaveExplorerApp.CaveExplorerApp.main(CaveExplorerApp.java:32)
+CaveExplorerApp.exceptions.GameCommandErrorException: dark is not a direction to move.
+	at CaveExplorerApp.commands.MoveCommand.execute(MoveCommand.java:35)
+	at CaveExplorerApp.Parser.processUserCommand(Parser.java:104)
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:40)
+	at CaveExplorerApp.CaveExplorerApp.main(CaveExplorerApp.java:32)
