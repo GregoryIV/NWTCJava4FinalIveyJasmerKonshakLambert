@@ -38,7 +38,6 @@ public class Player extends ItemHolder implements Movable {
     }
 
     /**
-     * TODO Implement a look method
      * Gets the description of an object.
      *
      * @param gameObject The game object that is being described.
@@ -124,10 +123,21 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
+    /**
+     * Gets a list of all item's in the players inventory
+     *
+     * @return - String list of items in the players inventory.
+     */
     public String printInventory() {
         return getInventoryList();
     }
 
+    /**
+     *Takes an item from the room and places it in the player's inventory
+     *
+     * @param item - the item to take
+     * @return - A message to the user whether the item was grabbed or not.
+     */
     public String takeItem(String item) {
         Item i;
         String returnString;
@@ -144,6 +154,13 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
+    /**
+     * Uses an item
+     * (swings a pickaxe, blows up dynamite)
+     *
+     * @param item - the item to use
+     * @return - message to the user about the results of the use.
+     */
     public String useItem(String item) {
         Item i;
         String returnString;
@@ -164,6 +181,14 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
+    /**
+     * Uses an item on another item
+     * (battery on flashlight, key on door)
+     *
+     * @param itemToUse - the item to be used
+     * @param itemToUseOn - the item to be used on
+     * @return - message to the user about the results of the use.
+     */
     public String useItemOn(String itemToUse, String itemToUseOn) {
         Item i, i1;
         String returnString;
@@ -194,6 +219,12 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
+    /**
+     * Drops an item from the players inventory to the room's floor
+     *
+     * @param item - the item to drop
+     * @return message to the user about the drop
+     */
     public String dropItem(String item) {
         Item i;
         String returnString;
@@ -210,7 +241,13 @@ public class Player extends ItemHolder implements Movable {
         return returnString;
     }
 
-    //2.2 valid use of encapsulation
+    /**
+     * Searches the current rooms inventory for an item
+     * 2.2 valid use of encapsulation
+     * @param item - item to find in the room
+     * @return - Item if found,
+     *           Null if the item is not in the room.
+     */
     private Item findItemInRoom(String item) {
         return currentRoom.findItem(item);
     }
