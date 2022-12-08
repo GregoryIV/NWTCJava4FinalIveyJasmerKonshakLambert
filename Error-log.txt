@@ -10,3 +10,30 @@ CaveExplorerApp.exceptions.GameCommandErrorException: dark is not a direction to
 	at CaveExplorerApp.Parser.processUserCommand(Parser.java:104)
 	at CaveExplorerApp.Parser.parseUserInput(Parser.java:40)
 	at CaveExplorerApp.CaveExplorerApp.main(CaveExplorerApp.java:32)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)
+CaveExplorerApp.exceptions.InvalidUserInputException: You must write a command!
+	at CaveExplorerApp.Parser.parseUserInput(Parser.java:31)
+	at CaveExplorerApp.CaveExplorer.main(CaveExplorer.java:38)

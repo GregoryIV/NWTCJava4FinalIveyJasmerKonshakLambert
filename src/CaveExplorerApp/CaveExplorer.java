@@ -26,7 +26,8 @@ public class CaveExplorer {
         BufferedReader inputReader  = new BufferedReader(new InputStreamReader(System.in));
 
         game = new Game();
-        game.showIntro(LocalTime.from(LocalDateTime.now()), new Locale.Builder().setLanguage("en").build());
+        game.showIntro(LocalTime.from(LocalDateTime.now()),
+                new Locale.Builder().setLanguage("en").build());
 
         do {
             System.out.print("> ");

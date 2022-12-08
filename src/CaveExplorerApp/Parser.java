@@ -58,7 +58,7 @@ public class Parser {
         ArrayList<String> userCommands = new ArrayList<>();
 
         for (String command : sanitizedInput) {
-            if (command.length() > 1) {
+            if (command.length() > 0) {
                 userCommands.add(command);
             }
         }
